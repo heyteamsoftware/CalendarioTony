@@ -2,6 +2,7 @@ const DATA_URL = "data/events.json";
 const MANUAL_URL = "api/events.php";
 const OVERRIDES_URL = "api/overrides.php";
 const REFRESCO_DATOS_MS = 15 * 60 * 1000;
+const RECARGA_PAGINA_MS = 3 * 60 * 60 * 1000;
 const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
 
@@ -401,6 +402,10 @@ async function iniciar() {
     if (iso(hoyDate()) !== diaPintado) location.reload();
   }, 60000);
   setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
+  // Recarga completa periódica: por si el cambio de día no llega a activarse
+  // (pantalla apagada esa noche, etc.), esto garantiza que cualquier despliegue
+  // nuevo llegue al kiosk como mucho 3 horas después de subirlo.
+  setInterval(() => location.reload(), RECARGA_PAGINA_MS);
 }
 
 iniciar();
