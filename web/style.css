@@ -157,7 +157,7 @@ html, body {
 
 .col-left {
   display: grid;
-  grid-template-rows: 334px 172px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 172px;
   gap: 20px;
 }
 
@@ -193,7 +193,6 @@ html, body {
 }
 .panel-title.gold { color: var(--gold); font-size: 22px; }
 .panel-title.cream { color: #FFD9A5; }
-.panel-title.blue { color: #7FB0E0; }
 
 /* ---------- HOY ---------- */
 
@@ -295,54 +294,6 @@ html, body {
   color: #F3CBA4;
 }
 
-/* ---------- en curso ---------- */
-
-.curso-list {
-  margin-top: 14px;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  overflow: hidden;
-  min-height: 0;
-}
-
-.curso-item .row1 {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.curso-item .titulo {
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--white);
-  min-width: 0;
-}
-
-.curso-item .restante {
-  font-size: 17px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.curso-item .barra {
-  height: 8px;
-  background: rgba(255, 255, 255, 0.10);
-  margin-top: 7px;
-}
-
-.curso-item .barra > div { height: 8px; }
-
-.curso-item .rango {
-  margin-top: 7px;
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--muted-2);
-}
-
 /* ---------- semana / 14 días ---------- */
 
 .rango {
@@ -370,8 +321,8 @@ html, body {
   min-height: 0;
   min-width: 0;
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
+  /* el primer día (hoy) ocupa el doble de ancho que el resto */
+  grid-template-columns: 2fr repeat(4, 1fr);
   gap: 8px;
 }
 
@@ -416,14 +367,15 @@ html, body {
   color: var(--white);
   font-variant-numeric: tabular-nums;
 }
-.day.hoy .cab .num { color: var(--gold-dark); }
+.day.hoy .cab .num { color: var(--gold-dark); font-size: 46px; }
 .day.finde .cab .num { color: var(--muted); }
 
 .day .evs {
   padding: 8px 8px 10px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   overflow: hidden;
   min-height: 0;
 }
@@ -433,19 +385,25 @@ html, body {
   border-left: 4px solid;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
   color: var(--white);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  overflow-wrap: break-word;
 }
 
-.day .mas {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--muted-2);
+.day-dots {
+  margin-top: auto;
+  flex: none;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
 }
+.day-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+}
+.day-dots span.on { background: var(--gold); }
 
 /* ---------- próximas semanas ---------- */
 

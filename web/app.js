@@ -2,8 +2,7 @@ const DATA_URL = "data/events.json";
 const MANUAL_URL = "api/events.php";
 const OVERRIDES_URL = "api/overrides.php";
 const REFRESCO_DATOS_MS = 15 * 60 * 1000;
-const DIAS_VISIBLES = 7;
-const MAX_EVENTOS_POR_DIA = 3;
+const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
 
 const DIA = 86400000;
@@ -69,7 +68,7 @@ function eventosPlanos() {
   datos.events.forEach((e) => {
     out.push({
       s: e.start, e: e.end, cat: categoriaDe(e),
-      t: e.time ? `${corto(e.title)} · ${e.time}` : corto(e.title),
+      t: e.time ? `${e.time} · ${corto(e.title)}` : corto(e.title),
     });
   });
   return out;
@@ -165,7 +164,50 @@ function actualizarProximo(planos, hoy) {
   return prox;
 }
 
+const ROTACION_DIA_MS = 4500;
+let diaCarrusel = {}; // { [isoKey]: { events, idx, el } }
+
+/* Pinta un único evento del día (texto completo, sin recortar) + puntos si hay más de uno. */
+function renderDiaEventos(dk) {
+  const estado = diaCarrusel[dk];
+  if (!estado) return;
+  const { events, idx, el } = estado;
+  el.innerHTML = "";
+  if (!events.length) return;
+
+  const ev = events[idx];
+  const cat = CATS[ev.cat] || CATS.centro;
+  const chip = document.createElement("div");
+  chip.className = "ev";
+  chip.style.borderLeftColor = cat.color;
+  chip.style.background = cat.tint;
+  chip.textContent = ev.t;
+  el.appendChild(chip);
+
+  if (events.length > 1) {
+    const dots = document.createElement("div");
+    dots.className = "day-dots";
+    events.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = i === idx ? "on" : "";
+      dots.appendChild(dot);
+    });
+    el.appendChild(dots);
+  }
+}
+
+function rotarDias() {
+  Object.keys(diaCarrusel).forEach((dk) => {
+    const estado = diaCarrusel[dk];
+    if (estado.events.length > 1) {
+      estado.idx = (estado.idx + 1) % estado.events.length;
+      renderDiaEventos(dk);
+    }
+  });
+}
+
 function actualizarSemana(planos, hoy) {
+  diaCarrusel = {};
   const finRango = addDays(hoy, DIAS_VISIBLES - 1);
   const finKey = iso(finRango);
   $("semanaRango").textContent =
@@ -195,23 +237,11 @@ function actualizarSemana(planos, hoy) {
 
     const evs = document.createElement("div");
     evs.className = "evs";
-    activos.slice(0, MAX_EVENTOS_POR_DIA).forEach((ev) => {
-      const cat = CATS[ev.cat] || CATS.centro;
-      const chip = document.createElement("div");
-      chip.className = "ev";
-      chip.style.borderLeftColor = cat.color;
-      chip.style.background = cat.tint;
-      chip.textContent = ev.t;
-      evs.appendChild(chip);
-    });
-    if (activos.length > MAX_EVENTOS_POR_DIA) {
-      const mas = document.createElement("div");
-      mas.className = "mas";
-      mas.textContent = `+${activos.length - MAX_EVENTOS_POR_DIA} más`;
-      evs.appendChild(mas);
-    }
     celda.appendChild(evs);
     cont.appendChild(celda);
+
+    diaCarrusel[dk] = { events: activos, idx: 0, el: evs };
+    renderDiaEventos(dk);
   }
 
   const notaEl = $("semanaNota");
@@ -225,36 +255,6 @@ function actualizarSemana(planos, hoy) {
     notaEl.hidden = true;
   }
   return finKey;
-}
-
-function actualizarEnCurso(planos, hoy) {
-  const k = iso(hoy);
-  const activos = planos
-    .filter((e) => e.s <= k && k <= e.e && diffKey(e.s, e.e) >= 3)
-    .sort((a, b) => a.e.localeCompare(b.e))
-    .slice(0, 4);
-
-  const lista = $("ongoingList");
-  lista.innerHTML = "";
-  if (!activos.length) { lista.appendChild(vacioEl("Ningún periodo largo activo.")); return; }
-
-  activos.forEach((e) => {
-    const total = diffKey(e.s, e.e), hecho = diffKey(e.s, k), quedan = diffKey(k, e.e);
-    const cat = CATS[e.cat] || CATS.centro;
-    const de = parseISO(e.s), df = parseISO(e.e);
-    const pct = Math.round(Math.min(100, Math.max(4, (hecho / total) * 100)));
-
-    const li = document.createElement("li");
-    li.className = "curso-item";
-    li.innerHTML = `
-      <div class="row1">
-        <div class="titulo">${e.t}</div>
-        <div class="restante" style="color:${cat.color}">${quedan === 0 ? "último día" : quedan === 1 ? "queda 1 día" : `quedan ${quedan} días`}</div>
-      </div>
-      <div class="barra"><div style="width:${pct}%;background:${cat.color}"></div></div>
-      <div class="rango">${de.getDate()} ${MESES_C[de.getMonth()]} – ${df.getDate()} ${MESES_C[df.getMonth()]}</div>`;
-    lista.appendChild(li);
-  });
 }
 
 function actualizarProximas(planos, finKey) {
@@ -303,7 +303,6 @@ function renderTodo() {
   actualizarHoy(planos, hoy);
   actualizarProximo(planos, hoy);
   const finKey = actualizarSemana(planos, hoy);
-  actualizarEnCurso(planos, hoy);
   actualizarProximas(planos, finKey);
   actualizarLeyenda();
   actualizarPie(now);
@@ -385,6 +384,7 @@ async function iniciar() {
   window.addEventListener("resize", ajustarEscala);
 
   setInterval(tickReloj, 5000);
+  setInterval(rotarDias, ROTACION_DIA_MS);
 
   try {
     diaPintado = iso(hoyDate());
@@ -393,9 +393,12 @@ async function iniciar() {
     $("proxTexto").textContent = err.message;
   }
 
-  // Repinta al cambiar de día (la pantalla vive encendida) y refresca datos periódicamente.
+  // La pantalla vive encendida sin recargar nunca la página, así que app.js/style.css
+  // se quedarían congelados en la versión con la que se abrió la pestaña. Al cambiar
+  // de día forzamos una recarga completa (no solo un repintado) para que cualquier
+  // despliegue nuevo llegue al kiosk como máximo una vez al día sin intervención manual.
   setInterval(() => {
-    if (iso(hoyDate()) !== diaPintado) { diaPintado = iso(hoyDate()); renderTodo(); }
+    if (iso(hoyDate()) !== diaPintado) location.reload();
   }, 60000);
   setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
 }
