@@ -1,0 +1,13 @@
+# Credenciales del FTP (nunca deben subirse)
+tools/deploy.env
+
+# Material de trabajo temporal, no forma parte del sitio
+claude_design/
+*.zip
+
+# Copias sueltas de assets ya integrados en web/img/
+/Logo_Tony_HD.png
+
+# Python
+__pycache__/
+*.pyc

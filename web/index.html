@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendario CIFP Tony Gallardo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
+</head>
+<body>
+
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <header class="top">
+      <div class="logo-box"><img src="img/logo.png" alt="Logo CIFP Tony Gallardo"></div>
+      <div class="brand">
+        <div class="brand-name">CIFP Tony Gallardo</div>
+        <div class="brand-sub">Centro Integrado de Formación Profesional · Las Palmas de Gran Canaria</div>
+      </div>
+      <div class="spacer"></div>
+      <div class="now">
+        <div class="now-row">
+          <div class="curso-badge" id="curso">CURSO 2026 · 2027</div>
+          <div class="clock" id="clock">--:--</div>
+        </div>
+        <div class="fecha-larga" id="todayLabel">&nbsp;</div>
+      </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <main class="grid">
+      <div class="col col-left">
+
+        <section class="panel hoy">
+          <div class="panel-head">
+            <div class="panel-title gold">HOY</div>
+            <div class="estado-label" id="estadoLabel"></div>
+          </div>
+          <div class="estado-nota" id="estadoNota" hidden></div>
+          <ul class="chip-list" id="hoyList"></ul>
+        </section>
+
+        <section class="panel proximo">
+          <div class="panel-head">
+            <div class="panel-title cream">PRÓXIMO EVENTO</div>
+            <div class="cuenta" id="proxCuenta"></div>
+          </div>
+          <div class="proximo-titulo" id="proxTexto"></div>
+          <div class="proximo-fecha" id="proxFecha"></div>
+        </section>
+
+        <section class="panel encurso">
+          <div class="panel-title blue">EN CURSO AHORA</div>
+          <ul class="curso-list" id="ongoingList"></ul>
+        </section>
+
+      </div>
+
+      <div class="col col-right">
+
+        <section class="panel semana">
+          <div class="panel-head">
+            <div class="panel-title">PRÓXIMOS 7 DÍAS</div>
+            <div class="rango" id="semanaRango"></div>
+          </div>
+          <div class="semana-nota" id="semanaNota" hidden></div>
+          <div class="week" id="weekGrid"></div>
+        </section>
+
+        <section class="panel proximas">
+          <div class="panel-title">PRÓXIMAS SEMANAS</div>
+          <ul class="upcoming-list" id="upcomingList"></ul>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="bottom">
+      <div class="leyenda" id="leyenda"></div>
+      <div class="spacer"></div>
+      <a class="admin-link" href="admin.html">Editar eventos</a>
+      <div class="pie-nota">
+        <span class="pulse"></span>
+        <span id="notaPie"></span>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script src="app.js?v=4"></script>
+</body>
+</html>

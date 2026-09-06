@@ -1,0 +1,1311 @@
+{
+ "curso": "2026-2027",
+ "generated_from": "Calendario 2026-2027.xlsx",
+ "sources": [
+  "General",
+  "Erasmus",
+  "Emergencias",
+  "Emergencias centros"
+ ],
+ "festivos": {
+  "2026-09-08": "Nuestra Señora Del Pino",
+  "2026-10-12": "Fiesta Nacional De España",
+  "2026-11-02": "Todos Los Santos",
+  "2026-12-07": "Día Del Enseñante Y Del Estudiante",
+  "2026-12-08": "Día De La Inmaculada Concepción"
+ },
+ "vacaciones": [
+  {
+   "start": "2026-12-23",
+   "end": "2027-01-08",
+   "title": "Navidad"
+  },
+  {
+   "start": "2027-03-22",
+   "end": "2027-03-26",
+   "title": "Semana Santa"
+  }
+ ],
+ "events": [
+  {
+   "start": "2026-09-09",
+   "end": "2026-09-09",
+   "title": "INICIO TCAE",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e79087b393"
+  },
+  {
+   "start": "2026-09-10",
+   "end": "2026-09-11",
+   "title": "Jordanas Eramus K122VET Valencia",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_2772d4d92d"
+  },
+  {
+   "start": "2026-09-16",
+   "end": "2026-09-16",
+   "title": "Inicio Curso",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_11f56e6b31"
+  },
+  {
+   "start": "2026-09-16",
+   "end": "2026-09-17",
+   "title": "Jordanas Eramus K131HED Toledo",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_aa9cc6234c"
+  },
+  {
+   "start": "2026-09-16",
+   "end": "2026-09-16",
+   "title": "comienzo clases",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_e9845169aa"
+  },
+  {
+   "start": "2026-09-18",
+   "end": "2026-09-18",
+   "title": "FIN TCAE",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_5dc422c827"
+  },
+  {
+   "start": "2026-09-18",
+   "end": "2026-09-20",
+   "title": "SG",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_c314ed5cc4"
+  },
+  {
+   "start": "2026-09-21",
+   "end": "2026-09-21",
+   "title": "INICIO FCT TCAE",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_4f99f57fae"
+  },
+  {
+   "start": "2026-09-21",
+   "end": "2026-09-21",
+   "title": "SG",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_4991642d51"
+  },
+  {
+   "start": "2026-09-22",
+   "end": "2026-09-28",
+   "title": "SG",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e9dfcfb62d"
+  },
+  {
+   "start": "2026-09-30",
+   "end": "2026-09-30",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_4f119a69a2"
+  },
+  {
+   "start": "2026-10-13",
+   "end": "2026-10-16",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_ac0446cca7"
+  },
+  {
+   "start": "2026-10-15",
+   "end": "2026-10-15",
+   "title": "ERASMUSLAND/ ERASMUS DAY",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_a3507fe070"
+  },
+  {
+   "start": "2026-10-19",
+   "end": "2026-10-21",
+   "title": "Evaluación inicial sin nota",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_1493741634"
+  },
+  {
+   "start": "2026-10-19",
+   "end": "2026-10-19",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_79a6548268"
+  },
+  {
+   "start": "2026-10-20",
+   "end": "2026-10-30",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_a3188edcc3"
+  },
+  {
+   "start": "2026-10-26",
+   "end": "2026-10-26",
+   "title": "Convivencia TSEAS Mañana",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_157fa03928"
+  },
+  {
+   "start": "2026-10-26",
+   "end": "2026-10-26",
+   "title": "Familias: Suspiros y Bienmesabe",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_cf8d5845a9"
+  },
+  {
+   "start": "2026-10-27",
+   "end": "2026-10-27",
+   "title": "Convivencia TSEAS",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_d5c5d25469"
+  },
+  {
+   "start": "2026-11-03",
+   "end": "2026-11-27",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_758818528e"
+  },
+  {
+   "start": "2026-11-06",
+   "end": "2026-11-06",
+   "title": "LaBásica Madrid",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_488c30e753"
+  },
+  {
+   "start": "2026-11-09",
+   "end": "2026-11-09",
+   "title": "Convivencia TSEAS Tarde",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_3b9fedd1e9"
+  },
+  {
+   "start": "2026-11-09",
+   "end": "2026-11-09",
+   "title": "Familias: Suspiros y Bienmesabe",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_24c1463f69"
+  },
+  {
+   "start": "2026-11-11",
+   "end": "2026-11-11",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e4b9cad2ea"
+  },
+  {
+   "start": "2026-11-20",
+   "end": "2026-11-20",
+   "title": "NETWORKING",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_98d302dd34"
+  },
+  {
+   "start": "2026-11-30",
+   "end": "2026-12-04",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_d80cb3cba9"
+  },
+  {
+   "start": "2026-12-02",
+   "end": "2026-12-02",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_167cd69dc9"
+  },
+  {
+   "start": "2026-12-04",
+   "end": "2026-12-04",
+   "title": "Propuesta LD",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_91e908211f"
+  },
+  {
+   "start": "2026-12-08",
+   "end": "2026-12-08",
+   "title": "Día de la Inmaculada",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_943a044334"
+  },
+  {
+   "start": "2026-12-09",
+   "end": "2026-12-18",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_2fc44599ab"
+  },
+  {
+   "start": "2026-12-11",
+   "end": "2026-12-11",
+   "title": "MERCABÁSICA",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_2b5c9ca038"
+  },
+  {
+   "start": "2026-12-14",
+   "end": "2026-12-18",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_d942901d51"
+  },
+  {
+   "start": "2026-12-16",
+   "end": "2026-12-16",
+   "title": "ORLA 2º TCAE",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_8381fbf51e"
+  },
+  {
+   "start": "2026-12-18",
+   "end": "2026-12-18",
+   "title": "FIESTA DE NAVIDAD ALUMNADO",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_d28cde1480"
+  },
+  {
+   "start": "2026-12-21",
+   "end": "2026-12-21",
+   "title": "Primera sesión de evaluación parcial y cierre de trimestre",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e8af5a85cd"
+  },
+  {
+   "start": "2026-12-22",
+   "end": "2026-12-22",
+   "title": "Entrega de notas",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_c20fdff3c5"
+  },
+  {
+   "start": "2027-01-11",
+   "end": "2027-01-11",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_331a2b33c0"
+  },
+  {
+   "start": "2027-01-11",
+   "end": "2027-01-15",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_f8e9355a59"
+  },
+  {
+   "start": "2027-01-12",
+   "end": "2027-02-05",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_5ae94e3a8e"
+  },
+  {
+   "start": "2027-01-15",
+   "end": "2027-01-15",
+   "title": "Presentación Proyectos de emprendimiento",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_fdb8fee39d"
+  },
+  {
+   "start": "2027-01-18",
+   "end": "2027-02-28",
+   "title": "Estancia Eramus FEOE 43 días 344h",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_7a2be55dcd"
+  },
+  {
+   "start": "2027-01-18",
+   "end": "2027-01-18",
+   "title": "INICIO FEOE 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_508273f723"
+  },
+  {
+   "start": "2027-01-25",
+   "end": "2027-01-26",
+   "title": "FORMACIÓN A ALUMNADO DE 2CFGM Y 2CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_decbd681fa"
+  },
+  {
+   "start": "2027-01-27",
+   "end": "2027-01-27",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_7c4988c454"
+  },
+  {
+   "start": "2027-01-29",
+   "end": "2027-01-29",
+   "title": "ESTANCIA + PROYECTO 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_ae3347b6d0"
+  },
+  {
+   "start": "2027-02-01",
+   "end": "2027-02-02",
+   "title": "CHARLAS FORMATIVAS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_247add0040"
+  },
+  {
+   "start": "2027-02-01",
+   "end": "2027-02-12",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_bdb9811ea2"
+  },
+  {
+   "start": "2027-02-01",
+   "end": "2027-02-01",
+   "title": "INICIO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_b8217ddef8"
+  },
+  {
+   "start": "2027-02-02",
+   "end": "2027-02-02",
+   "title": "Día de Carnaval Tony + CEIP Galicia",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_5b99394a58"
+  },
+  {
+   "start": "2027-02-03",
+   "end": "2027-02-03",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_67f453dbfb"
+  },
+  {
+   "start": "2027-02-04",
+   "end": "2027-02-22",
+   "title": "CHARLAS FORMATIVAS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_eaa24fb989"
+  },
+  {
+   "start": "2027-02-04",
+   "end": "2027-02-05",
+   "title": "V CONGRESO FP",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_2c0550c571"
+  },
+  {
+   "start": "2027-02-08",
+   "end": "2027-02-08",
+   "title": "Propuestas LD",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_76ac73b7e8"
+  },
+  {
+   "start": "2027-02-09",
+   "end": "2027-02-09",
+   "title": "CARNAVAL",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e7533dede9"
+  },
+  {
+   "start": "2027-02-09",
+   "end": "2027-02-09",
+   "title": "ESTANCIA 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_35c467797d"
+  },
+  {
+   "start": "2027-02-10",
+   "end": "2027-02-19",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_8db1bd7057"
+  },
+  {
+   "start": "2027-02-10",
+   "end": "2027-02-10",
+   "title": "Propuestas LD",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_da023e2ae7"
+  },
+  {
+   "start": "2027-02-10",
+   "end": "2027-02-10",
+   "title": "World maritime week/ Blue week",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_3b3aafeb04"
+  },
+  {
+   "start": "2027-02-11",
+   "end": "2027-02-11",
+   "title": "ESTANCIA + PROYECTO 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_b08bb308ef"
+  },
+  {
+   "start": "2027-02-11",
+   "end": "2027-02-11",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_dd5ec8637d"
+  },
+  {
+   "start": "2027-02-12",
+   "end": "2027-02-12",
+   "title": "ESTANCIA CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_f73a7e3594"
+  },
+  {
+   "start": "2027-02-15",
+   "end": "2027-02-15",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_82da83e2c8"
+  },
+  {
+   "start": "2027-02-15",
+   "end": "2027-02-19",
+   "title": "SEMANA ORIENTACIÓN",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_58dc36a98e"
+  },
+  {
+   "start": "2027-02-15",
+   "end": "2027-02-17",
+   "title": "Segunda sesión de evaluación parcial",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_9f88258ee6"
+  },
+  {
+   "start": "2027-02-16",
+   "end": "2027-02-18",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_349c128fe7"
+  },
+  {
+   "start": "2027-02-17",
+   "end": "2027-02-17",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_9cbf648084"
+  },
+  {
+   "start": "2027-02-18",
+   "end": "2027-02-18",
+   "title": "CANARIAS SKILLS*",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_d44c563fea"
+  },
+  {
+   "start": "2027-02-19",
+   "end": "2027-02-19",
+   "title": "Entrega de notas",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_3257f66a25"
+  },
+  {
+   "start": "2027-02-19",
+   "end": "2027-02-19",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_5e0e4dfb7e"
+  },
+  {
+   "start": "2027-02-22",
+   "end": "2027-02-24",
+   "title": "ACCIDENTE TODOS FEOE 1 y 2 CFGM - CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_6483d5a2f3"
+  },
+  {
+   "start": "2027-02-22",
+   "end": "2027-02-26",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_3924a21f3f"
+  },
+  {
+   "start": "2027-02-22",
+   "end": "2027-02-22",
+   "title": "Familias: Suspiros y Bienmesabe",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_49edfbc529"
+  },
+  {
+   "start": "2027-02-23",
+   "end": "2027-02-23",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_d0231ace26"
+  },
+  {
+   "start": "2027-02-24",
+   "end": "2027-02-26",
+   "title": "CHARLAS FORMATIVAS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_2d116b5e5e"
+  },
+  {
+   "start": "2027-02-24",
+   "end": "2027-02-24",
+   "title": "ESTANCIA + PROYECTO 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_197b075e3c"
+  },
+  {
+   "start": "2027-02-25",
+   "end": "2027-02-25",
+   "title": "Jueves Santo",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_8dfe3b62a4"
+  },
+  {
+   "start": "2027-02-26",
+   "end": "2027-02-26",
+   "title": "Certificación Idiomas*",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_a0c0239876"
+  },
+  {
+   "start": "2027-02-26",
+   "end": "2027-02-26",
+   "title": "Certificación Idiomas*/ Día de la Isleta",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_9e3a27e5a4"
+  },
+  {
+   "start": "2027-02-26",
+   "end": "2027-02-26",
+   "title": "DÍA DE LA ISLETA",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_344010450c"
+  },
+  {
+   "start": "2027-02-26",
+   "end": "2027-02-26",
+   "title": "Viernes Santo",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_77beb9ca42"
+  },
+  {
+   "start": "2027-03-29",
+   "end": "2027-04-09",
+   "title": "ACCIDENTE TODOS FEOE 1 y 2 CFGM - CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_9971b5e314"
+  },
+  {
+   "start": "2027-03-29",
+   "end": "2027-03-29",
+   "title": "ESTANCIA + PROYECTO 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_7ec749b946"
+  },
+  {
+   "start": "2027-04-01",
+   "end": "2027-04-01",
+   "title": "ESTANCIA CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_869269ddaa"
+  },
+  {
+   "start": "2027-04-04",
+   "end": "2027-04-04",
+   "title": "Ida",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_e285e2b163"
+  },
+  {
+   "start": "2027-04-05",
+   "end": "2027-04-11",
+   "title": "Estancia Formativa Grupal Eramus IFC+21 5días Estancia Formativa Grupal Eramus CFGB 10/15 días",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_f6fb399a6f"
+  },
+  {
+   "start": "2027-04-07",
+   "end": "2027-04-07",
+   "title": "ESTANCIA + PROYECTO 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_0cb9cea9be"
+  },
+  {
+   "start": "2027-04-07",
+   "end": "2027-04-07",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_37f5f86007"
+  },
+  {
+   "start": "2027-04-08",
+   "end": "2027-04-09",
+   "title": "FP EMPRESA",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_6d0ef11748"
+  },
+  {
+   "start": "2027-04-12",
+   "end": "2027-04-16",
+   "title": "Estancia Formativa Grupal Eramus CFGB 10/15 días",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_536ff7d98e"
+  },
+  {
+   "start": "2027-04-12",
+   "end": "2027-04-12",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_b3c22f3882"
+  },
+  {
+   "start": "2027-04-12",
+   "end": "2027-04-12",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_aa172aa671"
+  },
+  {
+   "start": "2027-04-13",
+   "end": "2027-04-13",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_d0c3ff990d"
+  },
+  {
+   "start": "2027-04-14",
+   "end": "2027-04-14",
+   "title": "ESTANCIA CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e4abe814b5"
+  },
+  {
+   "start": "2027-04-14",
+   "end": "2027-04-14",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_e644f0c654"
+  },
+  {
+   "start": "2027-04-15",
+   "end": "2027-04-15",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_762efca756"
+  },
+  {
+   "start": "2027-04-16",
+   "end": "2027-04-16",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/104",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_b4a34af8b1"
+  },
+  {
+   "start": "2027-04-16",
+   "end": "2027-04-16",
+   "title": "FIN FEOE 2º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_7be4995c9c"
+  },
+  {
+   "start": "2027-04-17",
+   "end": "2027-04-17",
+   "title": "Vuelta",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_ac69c38e11"
+  },
+  {
+   "start": "2027-04-19",
+   "end": "2027-04-19",
+   "title": "Encuentro Emprende, Cuida y Previene",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_9300ba0d4b"
+  },
+  {
+   "start": "2027-04-19",
+   "end": "2027-04-19",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_ad96c4679b"
+  },
+  {
+   "start": "2027-04-19",
+   "end": "2027-04-19",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_a5ab553dca"
+  },
+  {
+   "start": "2027-04-20",
+   "end": "2027-04-20",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_f66081c036"
+  },
+  {
+   "start": "2027-04-21",
+   "end": "2027-04-21",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_0ee4439c18"
+  },
+  {
+   "start": "2027-04-22",
+   "end": "2027-04-22",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_0979a5b75a"
+  },
+  {
+   "start": "2027-04-23",
+   "end": "2027-04-23",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/104",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_35e4a8c3fe"
+  },
+  {
+   "start": "2027-04-26",
+   "end": "2027-04-26",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_b9bac58408"
+  },
+  {
+   "start": "2027-04-26",
+   "end": "2027-04-26",
+   "title": "INICIO FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_53df52d824"
+  },
+  {
+   "start": "2027-04-26",
+   "end": "2027-04-26",
+   "title": "VISITA DE APRENDIZAJE LABÁSICA",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e8866f2a67"
+  },
+  {
+   "start": "2027-04-26",
+   "end": "2027-04-26",
+   "title": "VISITA DE APRENDIZAJE LABÁSICA*",
+   "source": "Erasmus",
+   "kind": "evento",
+   "id": "e_c3e164dbbf"
+  },
+  {
+   "start": "2027-04-27",
+   "end": "2027-04-27",
+   "title": "ESTANCIA CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_fd04cbb366"
+  },
+  {
+   "start": "2027-04-27",
+   "end": "2027-04-27",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_fa86b3e652"
+  },
+  {
+   "start": "2027-04-28",
+   "end": "2027-04-28",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_639ba1fbea"
+  },
+  {
+   "start": "2027-04-29",
+   "end": "2027-04-29",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_1adfae3ec3"
+  },
+  {
+   "start": "2027-04-30",
+   "end": "2027-04-30",
+   "title": "Propuesta LD",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_cf7147052a"
+  },
+  {
+   "start": "2027-05-01",
+   "end": "2027-05-01",
+   "title": "Fiesta del Trabajo",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_bfa9295876"
+  },
+  {
+   "start": "2027-05-03",
+   "end": "2027-05-03",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_2f67eb0953"
+  },
+  {
+   "start": "2027-05-04",
+   "end": "2027-05-04",
+   "title": "ESTANCIA FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_1570213577"
+  },
+  {
+   "start": "2027-05-04",
+   "end": "2027-05-04",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_0969e69c53"
+  },
+  {
+   "start": "2027-05-05",
+   "end": "2027-05-05",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_9130116ba5"
+  },
+  {
+   "start": "2027-05-05",
+   "end": "2027-05-05",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_02747f5a35"
+  },
+  {
+   "start": "2027-05-06",
+   "end": "2027-05-06",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_2823f9c831"
+  },
+  {
+   "start": "2027-05-07",
+   "end": "2027-05-07",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/104",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_ed523c478a"
+  },
+  {
+   "start": "2027-05-10",
+   "end": "2027-05-10",
+   "title": "ESTANCIA CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_631b93fee9"
+  },
+  {
+   "start": "2027-05-10",
+   "end": "2027-05-10",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_c43e2acf31"
+  },
+  {
+   "start": "2027-05-10",
+   "end": "2027-05-10",
+   "title": "Familias: Suspiros y Bienmesabe",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_7f95e5778e"
+  },
+  {
+   "start": "2027-05-11",
+   "end": "2027-05-11",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_99c0b8bab6"
+  },
+  {
+   "start": "2027-05-12",
+   "end": "2027-05-12",
+   "title": "ESTANCIA FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_450b4a2a21"
+  },
+  {
+   "start": "2027-05-12",
+   "end": "2027-05-12",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_4d5b80cf63"
+  },
+  {
+   "start": "2027-05-13",
+   "end": "2027-05-13",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_adf073e75a"
+  },
+  {
+   "start": "2027-05-14",
+   "end": "2027-05-14",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/104",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_3e3628d18f"
+  },
+  {
+   "start": "2027-05-17",
+   "end": "2027-05-17",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_50ee6f7a7a"
+  },
+  {
+   "start": "2027-05-18",
+   "end": "2027-05-18",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/101",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_ba5abe90df"
+  },
+  {
+   "start": "2027-05-19",
+   "end": "2027-05-19",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/102",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_2e51c35208"
+  },
+  {
+   "start": "2027-05-20",
+   "end": "2027-05-20",
+   "title": "ESTANCIA FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_401b604b41"
+  },
+  {
+   "start": "2027-05-20",
+   "end": "2027-05-20",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/103",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_c93519d44c"
+  },
+  {
+   "start": "2027-05-21",
+   "end": "2027-05-21",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/104",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_a8bb01805e"
+  },
+  {
+   "start": "2027-05-24",
+   "end": "2027-05-25",
+   "title": "2º CFGS Pérdidas E. Continua/ Recuperaciones",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e2d6f9d175"
+  },
+  {
+   "start": "2027-05-24",
+   "end": "2027-05-28",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_f0be6911b9"
+  },
+  {
+   "start": "2027-05-26",
+   "end": "2027-05-26",
+   "title": "2º CFGS Pérdidas E. Continua/ Recuperaciones",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_3934570aa5"
+  },
+  {
+   "start": "2027-05-26",
+   "end": "2027-05-26",
+   "title": "Evaluación Final Ciclo 2ºCFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_b478fc1725"
+  },
+  {
+   "start": "2027-05-27",
+   "end": "2027-05-27",
+   "title": "Entrega de notas 2º CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_72686815e9"
+  },
+  {
+   "start": "2027-05-27",
+   "end": "2027-05-27",
+   "title": "Evaluación Final Ciclo 2ºCFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_c05228194d"
+  },
+  {
+   "start": "2027-05-28",
+   "end": "2027-05-28",
+   "title": "DÍA DE CANARIAS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_33035b76bc"
+  },
+  {
+   "start": "2027-05-28",
+   "end": "2027-05-28",
+   "title": "ESTANCIA FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_8dbbf2a836"
+  },
+  {
+   "start": "2027-05-28",
+   "end": "2027-05-28",
+   "title": "ESTANCIA Y FIN CENTRO FEOE 2º CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_fc57c43256"
+  },
+  {
+   "start": "2027-05-28",
+   "end": "2027-05-28",
+   "title": "Entrega de notas 2º CFGS",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_748d50b2d1"
+  },
+  {
+   "start": "2027-05-30",
+   "end": "2027-05-30",
+   "title": "Día de Canarias",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_771a7bddb3"
+  },
+  {
+   "start": "2027-05-31",
+   "end": "2027-05-31",
+   "title": "Propuesta LD",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_2340ca5de3"
+  },
+  {
+   "start": "2027-06-01",
+   "end": "2027-06-11",
+   "title": "FEOE 1CFGS y 1CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_c45da00caf"
+  },
+  {
+   "start": "2027-06-02",
+   "end": "2027-06-02",
+   "title": "Equipos Educativos",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_82b19582a5"
+  },
+  {
+   "start": "2027-06-04",
+   "end": "2027-06-04",
+   "title": "FIN FEOE IFC+21",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_7e5f85f87e"
+  },
+  {
+   "start": "2027-06-07",
+   "end": "2027-06-07",
+   "title": "ESTANCIA FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_5099d0ebbf"
+  },
+  {
+   "start": "2027-06-09",
+   "end": "2027-06-10",
+   "title": "ORLAS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_e33fd378d0"
+  },
+  {
+   "start": "2027-06-11",
+   "end": "2027-06-11",
+   "title": "FIN FEOE 1º DE CFGM Y CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_64aadfdc7c"
+  },
+  {
+   "start": "2027-06-11",
+   "end": "2027-06-11",
+   "title": "TG AWARDS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_3ced5e1073"
+  },
+  {
+   "start": "2027-06-14",
+   "end": "2027-06-14",
+   "title": "Evaluación Final y Final de Ciclo Ordinaria CFGB",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_87b7cb46f7"
+  },
+  {
+   "start": "2027-06-15",
+   "end": "2027-06-18",
+   "title": "Pérdidas E. Continua/ Recuperaciones",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_907bb55e82"
+  },
+  {
+   "start": "2027-06-21",
+   "end": "2027-06-21",
+   "title": "Extraordinaria CFGB / Final 1º CFGM y CFGS/ Final 2º CFGM",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_f50dfa9925"
+  },
+  {
+   "start": "2027-06-22",
+   "end": "2027-06-22",
+   "title": "Entrega de notas (excepto) 2º CFGS",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_904db72afb"
+  },
+  {
+   "start": "2027-06-24",
+   "end": "2027-06-24",
+   "title": "San Juan",
+   "source": "General",
+   "kind": "evento",
+   "id": "e_b164fda6d1"
+  }
+ ]
+}

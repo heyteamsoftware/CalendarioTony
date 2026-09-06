@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editar eventos — Calendario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2rem 1rem 4rem;
+    background: #08182C; color: #F2EDE4;
+    font-family: "Archivo", system-ui, sans-serif;
+    display: flex; justify-content: center;
+  }
+  main { width: 100%; max-width: 720px; }
+  h1 { font-size: 1.4rem; margin-bottom: .2em; }
+  h2 { font-size: 1.05rem; margin: 0 0 .8em; }
+  p.sub { color: #9FB6D0; margin-bottom: 2em; }
+  form {
+    background: #0E2540; border: 1px solid #1C3A5E; border-radius: 14px;
+    padding: 1.4rem; display: grid; gap: 1rem; margin-bottom: 2rem;
+  }
+  label { display: flex; flex-direction: column; gap: .35em; font-size: .9rem; color: #9FB6D0; }
+  input {
+    background: #08182C; border: 1px solid #1C3A5E; border-radius: 8px;
+    color: #F2EDE4; padding: .6em .7em; font-size: 1rem;
+  }
+  input:disabled { opacity: .5; }
+  input:focus { outline: 2px solid #7FB0E0; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .buttons { display: flex; gap: .8rem; }
+  button {
+    background: #F0A93C; color: #3A0C14; border: none; border-radius: 8px;
+    padding: .7em 1em; font-weight: 700; font-size: 1rem; cursor: pointer;
+  }
+  button:hover { filter: brightness(1.05); }
+  button.secondary { background: transparent; color: #9FB6D0; border: 1px solid #1C3A5E; }
+  button.small { padding: .35em .8em; font-size: .82rem; font-weight: 600; border-radius: 6px; }
+  button.danger { background: transparent; color: #D8455F; border: 1px solid #D8455F; }
+  button.ghost { background: transparent; color: #7FB0E0; border: 1px solid #1C3A5E; }
+  #msg { min-height: 1.4em; font-size: .9rem; }
+  #msg.ok { color: #3FA79A; }
+  #msg.err { color: #D8455F; }
+  ul { list-style: none; padding: 0; display: grid; gap: .6rem; margin: 0 0 2.5rem; }
+  li {
+    background: #0E2540; border: 1px solid #1C3A5E; border-radius: 10px;
+    padding: .7em 1em; display: flex; justify-content: space-between; align-items: center; gap: 1em;
+  }
+  .edited-note {
+    padding: .6em .8em; background: rgba(240,169,60,.12); border: 1px solid #F0A93C;
+    border-radius: 8px; color: #FFD9A5; font-size: .85rem; font-weight: 600;
+  }
+  .info b { display: block; }
+  .info span { color: #9FB6D0; font-size: .85rem; }
+  .info .tag {
+    display: inline-block; margin-left: .5em; font-size: .7rem; text-transform: uppercase;
+    letter-spacing: .06em; color: #9FB6D0; border: 1px solid #1C3A5E; border-radius: 99px; padding: .05em .6em;
+  }
+  .actions { display: flex; gap: .5em; flex: 0 0 auto; }
+  a.back { color: #7FB0E0; text-decoration: none; font-size: .9rem; }
+  .empty { color: #9FB6D0; font-style: italic; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">&larr; Volver al calendario</a>
+  <h1 id="formTitle">Añadir evento manual</h1>
+  <p class="sub">Añade eventos nuevos, o edita/oculta cualquier evento del calendario (incluidos los que vienen del Excel).</p>
+
+  <form id="form">
+    <div class="row">
+      <label>Fecha
+        <input type="date" id="date" required>
+      </label>
+      <label>Hora (opcional)
+        <input type="time" id="time">
+      </label>
+    </div>
+    <label>Título
+      <input type="text" id="title" placeholder="Ej. Reunión de departamento" required maxlength="160">
+    </label>
+    <div id="editedNote" class="edited-note" hidden>Este evento ya tenía una edición guardada — vas a modificarla.</div>
+    <div class="buttons">
+      <button type="submit" id="submitBtn">Añadir evento</button>
+      <button type="button" class="secondary" id="cancelBtn" hidden>Cancelar edición</button>
+    </div>
+    <div id="msg"></div>
+  </form>
+
+  <h2>Todos los eventos</h2>
+  <ul id="list"><li>Cargando…</li></ul>
+</main>
+
+<script>
+const EVENTS_URL = "api/events.php";
+const OVERRIDES_URL = "api/overrides.php";
+const BASE_URL = "data/events.json";
+
+const form = document.getElementById("form");
+const msg = document.getElementById("msg");
+const list = document.getElementById("list");
+const cancelBtn = document.getElementById("cancelBtn");
+const submitBtn = document.getElementById("submitBtn");
+const formTitle = document.getElementById("formTitle");
+const dateField = document.getElementById("date");
+const timeField = document.getElementById("time");
+const titleField = document.getElementById("title");
+const editedNote = document.getElementById("editedNote");
+
+let editando = null; // { id, origin: 'manual' | 'excel', multiday, start, end }
+
+function setMsg(text, ok) {
+  msg.textContent = text;
+  msg.className = ok ? "ok" : "err";
+}
+
+function modoAlta() {
+  editando = null;
+  form.reset();
+  dateField.disabled = false;
+  formTitle.textContent = "Añadir evento manual";
+  submitBtn.textContent = "Añadir evento";
+  cancelBtn.hidden = true;
+  editedNote.hidden = true;
+}
+
+function modoEdicion(item) {
+  editando = { id: item.id, origin: item.origin, multiday: item.multiday, start: item.start, end: item.end };
+  dateField.value = item.multiday ? "" : item.start;
+  dateField.disabled = item.multiday;
+  timeField.value = item.time || "";
+  titleField.value = item.title;
+  formTitle.textContent = item.multiday
+    ? `Editar (${item.start} — ${item.end})`
+    : "Editar evento";
+  submitBtn.textContent = "Guardar cambios";
+  cancelBtn.hidden = false;
+  editedNote.hidden = !item.yaEditado;
+  titleField.focus();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+cancelBtn.addEventListener("click", modoAlta);
+
+async function cargarTodo() {
+  const [base, manual, overrides] = await Promise.all([
+    fetch(`${BASE_URL}?v=${Date.now()}`, { cache: "no-store" }).then((r) => r.json()),
+    fetch(`${EVENTS_URL}?v=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : []).catch(() => []),
+    fetch(`${OVERRIDES_URL}?v=${Date.now()}`, { cache: "no-store" }).then((r) => r.ok ? r.json() : {}).catch(() => ({})),
+  ]);
+
+  const excel = base.events.map((e) => ({
+    id: e.id, origin: "excel", start: e.start, end: e.end,
+    multiday: e.start !== e.end, title: e.title, time: null, source: e.source,
+  }));
+  const manuales = manual.map((e) => ({
+    id: e.id, origin: "manual", start: e.date, end: e.date,
+    multiday: false, title: e.title, time: e.time || null, source: "Manual",
+  }));
+
+  return [excel.concat(manuales), overrides];
+}
+
+function render(items, overrides) {
+  list.innerHTML = "";
+  if (!items.length) { list.innerHTML = "<li class='empty'>No hay eventos.</li>"; return; }
+
+  items
+    .sort((a, b) => a.start.localeCompare(b.start) || a.title.localeCompare(b.title))
+    .forEach((item) => {
+      const o = overrides[item.id];
+      if (o?.deleted) return; // ocultado, no se muestra
+      const efectivo = {
+        ...item,
+        title: o?.title ?? item.title,
+        time: o && "time" in o ? (o.time || null) : item.time,
+        start: (!item.multiday && o?.date) ? o.date : item.start,
+        end: (!item.multiday && o?.date) ? o.date : item.end,
+      };
+
+      const li = document.createElement("li");
+      const rango = efectivo.multiday ? `${efectivo.start} — ${efectivo.end}` : efectivo.start;
+      li.innerHTML = `
+        <div class="info">
+          <b>${efectivo.title}</b>
+          <span>${rango}${efectivo.time ? " · " + efectivo.time : ""}<span class="tag">${efectivo.source}</span></span>
+        </div>
+        <div class="actions">
+          <button class="small ghost" data-action="edit">Editar</button>
+          <button class="small danger" data-action="delete">${item.origin === "manual" ? "Borrar" : "Ocultar"}</button>
+          ${o ? '<button class="small secondary" data-action="revert">Revertir</button>' : ""}
+        </div>`;
+
+      li.querySelector('[data-action="edit"]').addEventListener("click", () => modoEdicion({ ...efectivo, yaEditado: !!o }));
+      li.querySelector('[data-action="delete"]').addEventListener("click", () => eliminar(item));
+      const revertBtn = li.querySelector('[data-action="revert"]');
+      if (revertBtn) revertBtn.addEventListener("click", () => revertir(item.id));
+
+      list.appendChild(li);
+    });
+
+  if (!list.children.length) list.innerHTML = "<li class='empty'>No hay eventos.</li>";
+}
+
+async function refrescar() {
+  const [items, overrides] = await cargarTodo();
+  render(items, overrides);
+}
+
+async function eliminar(item) {
+  const accion = item.origin === "manual" ? "borrar" : "ocultar";
+  if (!confirm(`¿Seguro que quieres ${accion} este evento?`)) return;
+  try {
+    if (item.origin === "manual") {
+      const res = await fetch(EVENTS_URL, {
+        method: "DELETE", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: item.id }),
+      });
+      if (!res.ok) throw new Error((await res.json()).error || "Error");
+    } else {
+      const res = await fetch(OVERRIDES_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: item.id, patch: { deleted: true } }),
+      });
+      if (!res.ok) throw new Error((await res.json()).error || "Error");
+    }
+    if (editando?.id === item.id) modoAlta();
+    refrescar();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+async function revertir(id) {
+  if (!confirm("¿Deshacer la edición y restaurar el evento original?")) return;
+  try {
+    const res = await fetch(OVERRIDES_URL, {
+      method: "DELETE", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id }),
+    });
+    if (!res.ok) throw new Error((await res.json()).error || "Error");
+    if (editando?.id === id) modoAlta();
+    refrescar();
+  } catch (err) {
+    alert(err.message);
+  }
+}
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const title = titleField.value.trim();
+  const time = timeField.value;
+
+  try {
+    if (!editando) {
+      const date = dateField.value;
+      const res = await fetch(EVENTS_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ date, time, title }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error desconocido");
+      setMsg("Evento añadido.", true);
+      modoAlta();
+    } else if (editando.origin === "manual") {
+      const date = dateField.value;
+      const res = await fetch(EVENTS_URL, {
+        method: "PUT", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: editando.id, date, time, title }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error desconocido");
+      setMsg("Evento actualizado.", true);
+      modoAlta();
+    } else {
+      const patch = { title, time };
+      if (!editando.multiday) patch.date = dateField.value;
+      const res = await fetch(OVERRIDES_URL, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: editando.id, patch }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error desconocido");
+      setMsg("Evento actualizado.", true);
+      modoAlta();
+    }
+    refrescar();
+  } catch (err) {
+    setMsg(err.message, false);
+  }
+});
+
+refrescar();
+</script>
+</body>
+</html>
