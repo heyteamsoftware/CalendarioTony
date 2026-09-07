@@ -59,6 +59,7 @@
     display: inline-block; margin-left: .5em; font-size: .7rem; text-transform: uppercase;
     letter-spacing: .06em; color: #9FB6D0; border: 1px solid #1C3A5E; border-radius: 99px; padding: .05em .6em;
   }
+  .info .detalle { display: block; margin-top: .2em; font-size: .78rem; color: #7FB0E0; }
   .actions { display: flex; gap: .5em; flex: 0 0 auto; }
   a.back { color: #7FB0E0; text-decoration: none; font-size: .9rem; }
   .empty { color: #9FB6D0; font-style: italic; }
@@ -81,6 +82,17 @@
     </div>
     <label>Título
       <input type="text" id="title" placeholder="Ej. Reunión de departamento" required maxlength="160">
+    </label>
+    <div id="extraFields" class="row">
+      <label>Hora de fin (opcional)
+        <input type="time" id="endTime">
+      </label>
+      <label>Ubicación (opcional)
+        <input type="text" id="location" placeholder="Ej. Aula Polivalente" maxlength="120">
+      </label>
+    </div>
+    <label id="audienceLabel">Asistentes (opcional)
+      <input type="text" id="audience" placeholder="Ej. Todo el profesorado" maxlength="160">
     </label>
     <div id="editedNote" class="edited-note" hidden>Este evento ya tenía una edición guardada — vas a modificarla.</div>
     <div class="buttons">
@@ -109,6 +121,11 @@ const dateField = document.getElementById("date");
 const timeField = document.getElementById("time");
 const titleField = document.getElementById("title");
 const editedNote = document.getElementById("editedNote");
+const endTimeField = document.getElementById("endTime");
+const locationField = document.getElementById("location");
+const audienceField = document.getElementById("audience");
+const extraFields = document.getElementById("extraFields");
+const audienceLabel = document.getElementById("audienceLabel");
 
 let editando = null; // { id, origin: 'manual' | 'excel', multiday, start, end }
 
@@ -125,6 +142,8 @@ function modoAlta() {
   submitBtn.textContent = "Añadir evento";
   cancelBtn.hidden = true;
   editedNote.hidden = true;
+  extraFields.hidden = false;
+  audienceLabel.hidden = false;
 }
 
 function modoEdicion(item) {
@@ -139,6 +158,16 @@ function modoEdicion(item) {
   submitBtn.textContent = "Guardar cambios";
   cancelBtn.hidden = false;
   editedNote.hidden = !item.yaEditado;
+
+  // Hora de fin / ubicación / asistentes solo existen para eventos manuales;
+  // los del Excel se editan por overrides y no tienen esos campos.
+  const esManual = item.origin === "manual";
+  extraFields.hidden = !esManual;
+  audienceLabel.hidden = !esManual;
+  endTimeField.value = esManual ? (item.endTime || "") : "";
+  locationField.value = esManual ? (item.location || "") : "";
+  audienceField.value = esManual ? (item.audience || "") : "";
+
   titleField.focus();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -159,6 +188,7 @@ async function cargarTodo() {
   const manuales = manual.map((e) => ({
     id: e.id, origin: "manual", start: e.date, end: e.date,
     multiday: false, title: e.title, time: e.time || null, source: "Manual",
+    endTime: e.endTime || null, location: e.location || null, audience: e.audience || null,
   }));
 
   return [excel.concat(manuales), overrides];
@@ -183,10 +213,13 @@ function render(items, overrides) {
 
       const li = document.createElement("li");
       const rango = efectivo.multiday ? `${efectivo.start} — ${efectivo.end}` : efectivo.start;
+      const horaTexto = efectivo.time ? " · " + efectivo.time + (efectivo.endTime ? "–" + efectivo.endTime : "") : "";
+      const detalle = [efectivo.location, efectivo.audience].filter(Boolean).join(" · ");
       li.innerHTML = `
         <div class="info">
           <b>${efectivo.title}</b>
-          <span>${rango}${efectivo.time ? " · " + efectivo.time : ""}<span class="tag">${efectivo.source}</span></span>
+          <span>${rango}${horaTexto}<span class="tag">${efectivo.source}</span></span>
+          ${detalle ? `<span class="detalle">${detalle}</span>` : ""}
         </div>
         <div class="actions">
           <button class="small ghost" data-action="edit">Editar</button>
@@ -253,13 +286,16 @@ form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
   const title = titleField.value.trim();
   const time = timeField.value;
+  const endTime = endTimeField.value;
+  const location = locationField.value.trim();
+  const audience = audienceField.value.trim();
 
   try {
     if (!editando) {
       const date = dateField.value;
       const res = await fetch(EVENTS_URL, {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date, time, title }),
+        body: JSON.stringify({ date, time, endTime, title, location, audience }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Error desconocido");
@@ -269,7 +305,7 @@ form.addEventListener("submit", async (ev) => {
       const date = dateField.value;
       const res = await fetch(EVENTS_URL, {
         method: "PUT", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editando.id, date, time, title }),
+        body: JSON.stringify({ id: editando.id, date, time, endTime, title, location, audience }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Error desconocido");

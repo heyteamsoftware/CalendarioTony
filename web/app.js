@@ -71,6 +71,7 @@ function eventosPlanos() {
   datos.events.forEach((e) => {
     out.push({
       s: e.start, e: e.end, cat: categoriaDe(e), time: e.time || null,
+      endTime: e.endTime || null, location: e.location || null, audience: e.audience || null,
       t: e.time ? `${e.time} · ${corto(e.title)}` : corto(e.title),
       titulo: corto(e.title),
     });
@@ -321,22 +322,28 @@ function actualizarAgenda(planos, hoy, now) {
   const lista = $("agendaList");
   lista.innerHTML = "";
 
-  const fila = (titulo, cat, horaTexto, estado) => {
-    const cats = CATS[cat] || CATS.centro;
+  const fila = (e, horaTexto, estado) => {
+    const cats = CATS[e.cat] || CATS.centro;
+    const detalle = [e.location, e.audience].filter(Boolean).join(" · ");
     const li = document.createElement("li");
     li.className = `agenda-item ${estado}`;
     li.style.borderLeftColor = cats.color;
     li.innerHTML = `
       <div class="agenda-hora" style="color:${cats.color}">${horaTexto}</div>
-      <div class="agenda-titulo">${titulo}</div>`;
+      <div class="agenda-cuerpo">
+        <div class="agenda-titulo">${e.titulo}</div>
+        ${detalle ? `<div class="agenda-detalle">${detalle}</div>` : ""}
+      </div>`;
     lista.appendChild(li);
   };
 
-  sinHora.forEach((e) => fila(e.titulo, e.cat, "TODO EL DÍA", "pendiente"));
+  sinHora.forEach((e) => fila(e, "TODO EL DÍA", "pendiente"));
   conHora.forEach((e) => {
     const min = minutosDe(e.time);
-    const estado = min + 45 < nowMin ? "pasado" : min <= nowMin ? "actual" : "pendiente";
-    fila(e.titulo, e.cat, e.time, estado);
+    const finMin = e.endTime ? minutosDe(e.endTime) : min + 45;
+    const estado = finMin < nowMin ? "pasado" : min <= nowMin ? "actual" : "pendiente";
+    const horaTexto = e.endTime ? `${e.time}–${e.endTime}` : e.time;
+    fila(e, horaTexto, estado);
   });
 
   if (!activos.length) lista.appendChild(vacioEl("Sin eventos programados para hoy."));
@@ -380,6 +387,7 @@ async function cargarManuales() {
     if (!Array.isArray(raw)) return [];
     return raw.map((e) => ({
       id: e.id, start: e.date, end: e.date, title: e.title, time: e.time || null,
+      endTime: e.endTime || null, location: e.location || null, audience: e.audience || null,
       source: "Manual", kind: "manual",
     }));
   } catch {

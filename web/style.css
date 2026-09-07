@@ -214,11 +214,18 @@ html, body {
 
 .agenda-hora {
   flex: none;
-  width: 130px;
-  font-size: 26px;
+  width: 170px;
+  font-size: 22px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
+}
+
+.agenda-cuerpo {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .agenda-titulo {
@@ -227,6 +234,12 @@ html, body {
   line-height: 1.2;
   color: var(--white);
   min-width: 0;
+}
+
+.agenda-detalle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--muted-2);
 }
 
 .col { min-height: 0; min-width: 0; }

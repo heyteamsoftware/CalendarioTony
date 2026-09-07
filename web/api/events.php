@@ -13,6 +13,31 @@ function guardar($f, $events) {
     file_put_contents($f, json_encode(array_values($events), JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
 }
 
+/* Valida y normaliza el cuerpo de un evento manual. Devuelve [datos, error]. */
+function leerEvento($input) {
+    $date = trim($input['date'] ?? '');
+    $time = trim($input['time'] ?? '');
+    $endTime = trim($input['endTime'] ?? '');
+    $title = trim($input['title'] ?? '');
+    $location = trim($input['location'] ?? '');
+    $audience = trim($input['audience'] ?? '');
+
+    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) || $title === '') {
+        return [null, 'Fecha (AAAA-MM-DD) o título inválido'];
+    }
+    if ($time !== '' && !preg_match('/^\d{2}:\d{2}$/', $time)) {
+        return [null, 'Hora inválida, usa HH:MM'];
+    }
+    if ($endTime !== '' && !preg_match('/^\d{2}:\d{2}$/', $endTime)) {
+        return [null, 'Hora de fin inválida, usa HH:MM'];
+    }
+
+    return [[
+        'date' => $date, 'time' => $time, 'endTime' => $endTime,
+        'title' => $title, 'location' => $location, 'audience' => $audience,
+    ], null];
+}
+
 $method = $_SERVER['REQUEST_METHOD'];
 $events = cargar($dataFile);
 
@@ -25,27 +50,13 @@ $input = json_decode(file_get_contents('php://input'), true);
 if (!is_array($input)) $input = [];
 
 if ($method === 'POST') {
-    $date = trim($input['date'] ?? '');
-    $time = trim($input['time'] ?? '');
-    $title = trim($input['title'] ?? '');
-
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) || $title === '') {
+    [$datosEvento, $error] = leerEvento($input);
+    if ($error) {
         http_response_code(400);
-        echo json_encode(['error' => 'Fecha (AAAA-MM-DD) o título inválido']);
+        echo json_encode(['error' => $error]);
         exit;
     }
-    if ($time !== '' && !preg_match('/^\d{2}:\d{2}$/', $time)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Hora inválida, usa HH:MM']);
-        exit;
-    }
-
-    $events[] = [
-        'id' => uniqid('m_', true),
-        'date' => $date,
-        'time' => $time,
-        'title' => $title,
-    ];
+    $events[] = array_merge(['id' => uniqid('m_', true)], $datosEvento);
     guardar($dataFile, $events);
     echo json_encode(['ok' => true]);
     exit;
@@ -53,27 +64,17 @@ if ($method === 'POST') {
 
 if ($method === 'PUT') {
     $id = $input['id'] ?? '';
-    $date = trim($input['date'] ?? '');
-    $time = trim($input['time'] ?? '');
-    $title = trim($input['title'] ?? '');
-
-    if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $date) || $title === '') {
+    [$datosEvento, $error] = leerEvento($input);
+    if ($error) {
         http_response_code(400);
-        echo json_encode(['error' => 'Fecha (AAAA-MM-DD) o título inválido']);
-        exit;
-    }
-    if ($time !== '' && !preg_match('/^\d{2}:\d{2}$/', $time)) {
-        http_response_code(400);
-        echo json_encode(['error' => 'Hora inválida, usa HH:MM']);
+        echo json_encode(['error' => $error]);
         exit;
     }
 
     $found = false;
     foreach ($events as &$e) {
         if (($e['id'] ?? null) === $id) {
-            $e['date'] = $date;
-            $e['time'] = $time;
-            $e['title'] = $title;
+            $e = array_merge($e, $datosEvento);
             $found = true;
             break;
         }
