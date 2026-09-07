@@ -440,9 +440,28 @@ function tickReloj() {
 
 let diaPintado = null;
 
+/* Evita que la pantalla se apague/bloquee mientras el kiosk está abierto.
+   Requiere HTTPS (contexto seguro); si no está disponible, no hace nada. */
+async function mantenerPantallaActiva() {
+  if (!("wakeLock" in navigator)) return;
+  try {
+    const lock = await navigator.wakeLock.request("screen");
+    lock.addEventListener("release", () => {
+      // El sistema puede soltarlo (p. ej. al minimizar); se vuelve a pedir al recuperar visibilidad.
+    });
+  } catch {
+    // Falla en pestañas no visibles o sin permiso; se reintenta con el listener de abajo.
+  }
+}
+
 async function iniciar() {
   ajustarEscala();
   window.addEventListener("resize", ajustarEscala);
+
+  mantenerPantallaActiva();
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") mantenerPantallaActiva();
+  });
 
   setInterval(tickReloj, 5000);
   setInterval(rotarDias, ROTACION_DIA_MS);
