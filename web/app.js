@@ -5,6 +5,7 @@ const REFRESCO_DATOS_MS = 15 * 60 * 1000;
 const RECARGA_PAGINA_MS = 3 * 60 * 60 * 1000;
 const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
+const UMBRAL_AGENDA = 4; // nº de eventos con hora hoy a partir del cual se activa el modo agenda
 
 const DIA = 86400000;
 const DOW = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
@@ -61,15 +62,17 @@ function corto(t) {
 function eventosPlanos() {
   const out = [];
   Object.entries(datos.festivos || {}).forEach(([fecha, nombre]) => {
-    out.push({ s: fecha, e: fecha, cat: "fest", t: nombre });
+    out.push({ s: fecha, e: fecha, cat: "fest", t: nombre, titulo: nombre, time: null });
   });
   (datos.vacaciones || []).forEach((v) => {
-    out.push({ s: v.start, e: v.end, cat: "vac", t: `Vacaciones de ${v.title}` });
+    const titulo = `Vacaciones de ${v.title}`;
+    out.push({ s: v.start, e: v.end, cat: "vac", t: titulo, titulo, time: null });
   });
   datos.events.forEach((e) => {
     out.push({
-      s: e.start, e: e.end, cat: categoriaDe(e),
+      s: e.start, e: e.end, cat: categoriaDe(e), time: e.time || null,
       t: e.time ? `${e.time} · ${corto(e.title)}` : corto(e.title),
+      titulo: corto(e.title),
     });
   });
   return out;
@@ -295,6 +298,50 @@ function actualizarPie(now) {
     `Calendario escolar oficial del centro · última comprobación ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 }
 
+/* ---------- modo agenda (días con muchos eventos con hora) ---------- */
+
+const minutosDe = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+
+/* Cuenta los eventos de hoy con hora definida; ese número decide si se activa el modo agenda. */
+function eventosHoyConHora(planos, hoy) {
+  const k = iso(hoy);
+  return activosEn(planos, k).filter((e) => e.time);
+}
+
+function actualizarAgenda(planos, hoy, now) {
+  const k = iso(hoy);
+  const activos = activosEn(planos, k);
+  const conHora = activos.filter((e) => e.time).sort((a, b) => a.time.localeCompare(b.time));
+  const sinHora = activos.filter((e) => !e.time);
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+
+  $("agendaFecha").textContent =
+    `${DOW_LARGO[wd(k)]}, ${hoy.getDate()} de ${MESES[hoy.getMonth()]}`.toUpperCase();
+
+  const lista = $("agendaList");
+  lista.innerHTML = "";
+
+  const fila = (titulo, cat, horaTexto, estado) => {
+    const cats = CATS[cat] || CATS.centro;
+    const li = document.createElement("li");
+    li.className = `agenda-item ${estado}`;
+    li.style.borderLeftColor = cats.color;
+    li.innerHTML = `
+      <div class="agenda-hora" style="color:${cats.color}">${horaTexto}</div>
+      <div class="agenda-titulo">${titulo}</div>`;
+    lista.appendChild(li);
+  };
+
+  sinHora.forEach((e) => fila(e.titulo, e.cat, "TODO EL DÍA", "pendiente"));
+  conHora.forEach((e) => {
+    const min = minutosDe(e.time);
+    const estado = min + 45 < nowMin ? "pasado" : min <= nowMin ? "actual" : "pendiente";
+    fila(e.titulo, e.cat, e.time, estado);
+  });
+
+  if (!activos.length) lista.appendChild(vacioEl("Sin eventos programados para hoy."));
+}
+
 function renderTodo() {
   const hoy = hoyDate();
   const now = new Date();
@@ -307,6 +354,11 @@ function renderTodo() {
   actualizarProximas(planos, finKey);
   actualizarLeyenda();
   actualizarPie(now);
+
+  const esDiaEspecial = eventosHoyConHora(planos, hoy).length >= UMBRAL_AGENDA;
+  $("grid").hidden = esDiaEspecial;
+  $("agenda").hidden = !esDiaEspecial;
+  if (esDiaEspecial) actualizarAgenda(planos, hoy, now);
 }
 
 /* ---------- escala del escenario 1920x1080 ---------- */
@@ -399,7 +451,8 @@ async function iniciar() {
   // de día forzamos una recarga completa (no solo un repintado) para que cualquier
   // despliegue nuevo llegue al kiosk como máximo una vez al día sin intervención manual.
   setInterval(() => {
-    if (iso(hoyDate()) !== diaPintado) location.reload();
+    if (iso(hoyDate()) !== diaPintado) { location.reload(); return; }
+    if (!$("agenda").hidden) actualizarAgenda(eventosPlanos(), hoyDate(), new Date());
   }, 60000);
   setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
   // Recarga completa periódica: por si el cambio de día no llega a activarse

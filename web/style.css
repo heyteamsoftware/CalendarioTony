@@ -145,12 +145,88 @@ html, body {
 
 /* ---------- rejilla principal ---------- */
 
+.grid[hidden], .agenda[hidden] { display: none; }
+
 .grid {
   flex: 1;
   min-height: 0;
   display: grid;
   grid-template-columns: 600px minmax(0, 1fr);
   gap: 22px;
+}
+
+/* ---------- modo agenda (días con muchos eventos con hora) ---------- */
+
+.agenda {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--gold);
+  padding: 22px 28px;
+}
+
+.agenda-head {
+  flex: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.agenda-fecha {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.agenda-list {
+  margin-top: 16px;
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.agenda-item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 22px;
+  border-left: 6px solid;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.agenda-item.pasado { opacity: .4; }
+
+.agenda-item.actual {
+  background: rgba(240, 169, 60, 0.12);
+  box-shadow: 0 0 0 1px var(--gold) inset;
+}
+
+.agenda-hora {
+  flex: none;
+  width: 130px;
+  font-size: 26px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+
+.agenda-titulo {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--white);
+  min-width: 0;
 }
 
 .col { min-height: 0; min-width: 0; }

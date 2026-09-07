@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
     <div class="divider"></div>
 
-    <main class="grid">
+    <main class="grid" id="grid">
       <div class="col col-left">
 
         <section class="panel hoy">
@@ -74,6 +74,14 @@
       </div>
     </main>
 
+    <main class="agenda" id="agenda" hidden>
+      <div class="agenda-head">
+        <div class="panel-title gold">AGENDA DE HOY</div>
+        <div class="agenda-fecha" id="agendaFecha"></div>
+      </div>
+      <ul class="agenda-list" id="agendaList"></ul>
+    </main>
+
     <footer class="bottom">
       <div class="leyenda" id="leyenda"></div>
       <div class="spacer"></div>
@@ -87,6 +95,6 @@
   </div>
 </div>
 
-<script src="app.js?v=8"></script>
+<script src="app.js?v=10"></script>
 </body>
 </html>
