@@ -6,6 +6,8 @@ const RECARGA_PAGINA_MS = 3 * 60 * 60 * 1000;
 const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
 const UMBRAL_AGENDA = 4; // nº de eventos con hora hoy a partir del cual se activa el modo agenda
+const BLACKOUT_INICIO_MIN = 20 * 60 + 30; // 20:30, de lunes a viernes
+const BLACKOUT_FIN_MIN = 7 * 60 + 30;     // 07:30, de lunes a viernes
 
 const DIA = 86400000;
 const DOW = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
@@ -202,6 +204,7 @@ function renderDiaEventos(dk) {
 }
 
 function rotarDias() {
+  if (blackoutActivo) return; // en negro no hay nada que actualizar
   Object.keys(diaCarrusel).forEach((dk) => {
     const estado = diaCarrusel[dk];
     if (estado.events.length > 1) {
@@ -302,6 +305,7 @@ function actualizarPie(now) {
 /* ---------- modo agenda (días con muchos eventos con hora) ---------- */
 
 const minutosDe = (hhmm) => { const [h, m] = hhmm.split(":").map(Number); return h * 60 + m; };
+let modoAgendaActivo = false;
 
 /* Cuenta los eventos de hoy con hora definida; ese número decide si se activa el modo agenda. */
 function eventosHoyConHora(planos, hoy) {
@@ -315,9 +319,6 @@ function actualizarAgenda(planos, hoy, now) {
   const conHora = activos.filter((e) => e.time).sort((a, b) => a.time.localeCompare(b.time));
   const sinHora = activos.filter((e) => !e.time);
   const nowMin = now.getHours() * 60 + now.getMinutes();
-
-  $("agendaFecha").textContent =
-    `${DOW_LARGO[wd(k)]}, ${hoy.getDate()} de ${MESES[hoy.getMonth()]}`.toUpperCase();
 
   const lista = $("agendaList");
   lista.innerHTML = "";
@@ -362,10 +363,17 @@ function renderTodo() {
   actualizarLeyenda();
   actualizarPie(now);
 
-  const esDiaEspecial = eventosHoyConHora(planos, hoy).length >= UMBRAL_AGENDA;
-  $("grid").hidden = esDiaEspecial;
-  $("agenda").hidden = !esDiaEspecial;
-  if (esDiaEspecial) actualizarAgenda(planos, hoy, now);
+  // Día con agenda apretada: el panel HOY sustituye sus chips por la agenda horaria
+  // completa (conviviendo con el resto del layout: Próximo evento, Próximos 5 días,
+  // Próximas semanas siguen visibles).
+  modoAgendaActivo = eventosHoyConHora(planos, hoy).length >= UMBRAL_AGENDA;
+  $("hoyTitulo").textContent = modoAgendaActivo ? "AGENDA DE HOY" : "HOY";
+  $("hoyList").hidden = modoAgendaActivo;
+  $("agendaList").hidden = !modoAgendaActivo;
+  if (modoAgendaActivo) {
+    $("estadoNota").hidden = true;
+    actualizarAgenda(planos, hoy, now);
+  }
 }
 
 /* ---------- escala del escenario 1920x1080 ---------- */
@@ -434,36 +442,78 @@ async function cargar() {
 }
 
 function tickReloj() {
+  if (blackoutActivo) return; // en negro no hay nada que actualizar
   const now = new Date();
   $("clock").textContent = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 }
 
 let diaPintado = null;
 
+/* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
+
+/* Lunes a viernes de 20:30 a 07:30, y sábado/domingo completos. */
+function enBlackout(now) {
+  const dia = now.getDay(); // 0 = domingo … 6 = sábado
+  if (dia === 0 || dia === 6) return true;
+  const min = now.getHours() * 60 + now.getMinutes();
+  return min >= BLACKOUT_INICIO_MIN || min < BLACKOUT_FIN_MIN;
+}
+
+let blackoutActivo = false;
+
+function aplicarBlackout(now) {
+  const activo = enBlackout(now);
+  if (activo === blackoutActivo) return;
+  blackoutActivo = activo;
+  if (activo) {
+    // Entra en apagón: se oculta todo y se deja de actualizar (sin red, sin repintados)
+    // hasta que termine; no hay nadie mirando la pantalla en negro.
+    $("blackout").hidden = false;
+    liberarPantalla();
+    return;
+  }
+  // Sale del apagón: recarga completa para arrancar con el código y los datos más
+  // recientes (evita esperar hasta 15 min a que llegue el próximo refresco).
+  location.reload();
+}
+
 /* Evita que la pantalla se apague/bloquee mientras el kiosk está abierto.
    Requiere HTTPS (contexto seguro); si no está disponible, no hace nada. */
+let wakeLockRef = null;
+
 async function mantenerPantallaActiva() {
-  if (!("wakeLock" in navigator)) return;
+  if (!("wakeLock" in navigator) || blackoutActivo) return;
   try {
-    const lock = await navigator.wakeLock.request("screen");
-    lock.addEventListener("release", () => {
+    wakeLockRef = await navigator.wakeLock.request("screen");
+    wakeLockRef.addEventListener("release", () => {
       // El sistema puede soltarlo (p. ej. al minimizar); se vuelve a pedir al recuperar visibilidad.
+      wakeLockRef = null;
     });
   } catch {
     // Falla en pestañas no visibles o sin permiso; se reintenta con el listener de abajo.
   }
 }
 
+/* Suelta el wake lock durante el apagón: fuera del horario de clase no hace
+   falta forzar la pantalla a permanecer encendida. */
+function liberarPantalla() {
+  if (wakeLockRef) wakeLockRef.release().catch(() => {});
+  wakeLockRef = null;
+}
+
 async function iniciar() {
   ajustarEscala();
   window.addEventListener("resize", ajustarEscala);
 
-  mantenerPantallaActiva();
+  blackoutActivo = enBlackout(new Date());
+  $("blackout").hidden = !blackoutActivo;
+  if (!blackoutActivo) mantenerPantallaActiva();
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") mantenerPantallaActiva();
   });
 
   setInterval(tickReloj, 5000);
+  setInterval(() => aplicarBlackout(new Date()), 5000);
   setInterval(rotarDias, ROTACION_DIA_MS);
 
   try {
@@ -478,14 +528,16 @@ async function iniciar() {
   // de día forzamos una recarga completa (no solo un repintado) para que cualquier
   // despliegue nuevo llegue al kiosk como máximo una vez al día sin intervención manual.
   setInterval(() => {
+    if (blackoutActivo) return; // se retoma con la recarga al salir del apagón
     if (iso(hoyDate()) !== diaPintado) { location.reload(); return; }
-    if (!$("agenda").hidden) actualizarAgenda(eventosPlanos(), hoyDate(), new Date());
+    if (modoAgendaActivo) actualizarAgenda(eventosPlanos(), hoyDate(), new Date());
   }, 60000);
-  setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
+  setInterval(() => { if (!blackoutActivo) cargar().catch(() => {}); }, REFRESCO_DATOS_MS);
   // Recarga completa periódica: por si el cambio de día no llega a activarse
   // (pantalla apagada esa noche, etc.), esto garantiza que cualquier despliegue
-  // nuevo llegue al kiosk como mucho 3 horas después de subirlo.
-  setInterval(() => location.reload(), RECARGA_PAGINA_MS);
+  // nuevo llegue al kiosk como mucho 3 horas después de subirlo. En negro no hace
+  // falta: ya se recarga entera en cuanto termina el apagón (aplicarBlackout).
+  setInterval(() => { if (!blackoutActivo) location.reload(); }, RECARGA_PAGINA_MS);
 }
 
 iniciar();

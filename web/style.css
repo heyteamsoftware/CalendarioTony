@@ -33,6 +33,16 @@ html, body {
 
 @keyframes tgblink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
 
+/* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
+
+.blackout {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+}
+.blackout[hidden] { display: none; }
+
 /* ---------- escenario fijo 1920x1080, escalado a la ventana ---------- */
 
 .viewport {
@@ -145,8 +155,6 @@ html, body {
 
 /* ---------- rejilla principal ---------- */
 
-.grid[hidden], .agenda[hidden] { display: none; }
-
 .grid {
   flex: 1;
   min-height: 0;
@@ -155,35 +163,12 @@ html, body {
   gap: 22px;
 }
 
-/* ---------- modo agenda (días con muchos eventos con hora) ---------- */
+/* ---------- modo agenda (días con muchos eventos con hora, dentro del panel HOY) ---------- */
 
-.agenda {
-  flex: 1;
-  min-height: 0;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-top: 5px solid var(--gold);
-  padding: 22px 28px;
-}
-
-.agenda-head {
-  flex: none;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.agenda-fecha {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
+/* .chip-list/.agenda-list fijan su propio "display"; sin esto el atributo [hidden]
+   no basta para ocultarlas (una regla de autor con la misma especificidad siempre
+   gana al estilo [hidden] del navegador) y ambas listas quedarían superpuestas. */
+.chip-list[hidden], .agenda-list[hidden] { display: none; }
 
 .agenda-list {
   margin-top: 16px;
@@ -240,6 +225,43 @@ html, body {
   font-size: 15px;
   font-weight: 600;
   color: var(--muted-2);
+}
+
+/* Variante compacta: la agenda conviviendo dentro del panel HOY (600px de ancho)
+   en vez de ocupar toda la pantalla. Una línea por evento, sin envolver texto,
+   para que quepan todos sin scroll. */
+.agenda-list--compacta {
+  margin-top: 12px;
+  gap: 6px;
+}
+.agenda-list--compacta .agenda-item {
+  gap: 14px;
+  padding: 0 14px;
+}
+.agenda-list--compacta .agenda-hora {
+  width: 96px;
+  font-size: 16px;
+}
+.agenda-list--compacta .agenda-cuerpo {
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.agenda-list--compacta .agenda-titulo {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.agenda-list--compacta .agenda-detalle {
+  flex: none;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40%;
 }
 
 .col { min-height: 0; min-width: 0; }
