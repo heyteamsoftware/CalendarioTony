@@ -477,6 +477,31 @@ function aplicarBlackout(now) {
   location.reload();
 }
 
+/* ---------- pantalla completa ---------- */
+
+/* Los navegadores solo permiten pedir pantalla completa como reacción directa a
+   un gesto del usuario (clic, toque, tecla): no se puede activar sola al cargar
+   la página. Por eso se intenta en cuanto llega el primer gesto (por ejemplo,
+   al arrancar el PC si alguien toca la pantalla, o tras una reconexión de
+   teclado/ratón). Para que el kiosk arranque en pantalla completa sin depender
+   de que nadie lo toque, hay que lanzar el navegador con su bandera de kiosko
+   (p. ej. "chrome --kiosk https://paneltony.gt.tc/calendario/"), que la pone en
+   pantalla completa desde el propio sistema operativo. */
+function activarPantallaCompletaAlPrimerGesto() {
+  if (document.fullscreenElement) return;
+  const intentar = () => {
+    document.removeEventListener("click", intentar);
+    document.removeEventListener("keydown", intentar);
+    document.removeEventListener("touchstart", intentar);
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().catch(() => {});
+    }
+  };
+  document.addEventListener("click", intentar, { once: true });
+  document.addEventListener("keydown", intentar, { once: true });
+  document.addEventListener("touchstart", intentar, { once: true });
+}
+
 /* Evita que la pantalla se apague/bloquee mientras el kiosk está abierto.
    Requiere HTTPS (contexto seguro); si no está disponible, no hace nada. */
 let wakeLockRef = null;
@@ -504,6 +529,7 @@ function liberarPantalla() {
 async function iniciar() {
   ajustarEscala();
   window.addEventListener("resize", ajustarEscala);
+  activarPantallaCompletaAlPrimerGesto();
 
   blackoutActivo = enBlackout(new Date());
   $("blackout").hidden = !blackoutActivo;
