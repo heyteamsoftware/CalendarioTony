@@ -1,0 +1,18 @@
+# Publica esta app en myappsserver.duckdns.org cada vez que se sube un cambio.
+name: Desplegar en el servidor
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enviar al servidor
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          tar czf - --exclude=.git . | ssh -i ~/.ssh/deploy -o StrictHostKeyChecking=accept-new ubuntu@129.151.249.242 Tony_Calendario
