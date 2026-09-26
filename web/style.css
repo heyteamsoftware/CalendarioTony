@@ -33,16 +33,6 @@ html, body {
 
 @keyframes tgblink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
 
-/* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
-
-.blackout {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 9999;
-}
-.blackout[hidden] { display: none; }
-
 /* ---------- escenario fijo 1920x1080, escalado a la ventana ---------- */
 
 .viewport {
@@ -154,6 +144,131 @@ html, body {
 }
 
 /* ---------- rejilla principal ---------- */
+
+.grid[hidden], .tranquilo[hidden] { display: none; }
+
+/* ---------- semana tranquila: próximos eventos y cuentas atrás en grande ---------- */
+
+.tranquilo {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 640px;
+  gap: 26px;
+}
+
+.tq-proximos {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--gold);
+  padding: 22px 28px;
+}
+
+.tq-aviso {
+  flex: none;
+  margin-bottom: 22px;
+  padding: 16px 26px;
+  border-left: 8px solid var(--gold);
+  background: rgba(240, 169, 60, 0.13);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+.tq-lista {
+  margin-top: 18px;
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 14px;
+}
+
+.tq-item {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 28px 0 0;
+  border-left: 8px solid;
+  background: rgba(255, 255, 255, 0.04);
+  min-height: 0;
+}
+
+.tq-fecha {
+  flex: none;
+  width: 150px;
+  text-align: center;
+  line-height: 1;
+}
+.tq-fecha .num { font-size: 76px; font-weight: 800; color: var(--white); }
+.tq-fecha .mes { margin-top: 6px; font-size: 22px; font-weight: 800; letter-spacing: 0.16em; }
+
+.tq-cuerpo { flex: 1; min-width: 0; }
+.tq-titulo {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.12;
+  color: var(--white);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.tq-rango {
+  margin-top: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.tq-rango::first-letter, .tq-cuenta .tq-cuando-fecha::first-letter { text-transform: uppercase; }
+
+.tq-cuando {
+  flex: none;
+  padding: 12px 20px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--gold-dark);
+}
+
+.tq-cuentas {
+  min-height: 0;
+  display: grid;
+  grid-auto-rows: 1fr;
+  gap: 26px;
+}
+
+.tq-cuenta {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 18px 24px;
+  background: var(--maroon);
+  border: 1px solid var(--border-gold-weak);
+}
+.tq-cuenta.verano { background: #12503F; }
+.tq-cuenta .tq-cab { font-size: 24px; font-weight: 800; letter-spacing: 0.18em; color: #FFD9A5; }
+.tq-cuenta .tq-dias { margin-top: 6px; font-size: 168px; font-weight: 800; line-height: 1; color: var(--white); font-variant-numeric: tabular-nums; }
+.tq-cuenta .tq-uds { font-size: 34px; font-weight: 800; letter-spacing: 0.22em; color: var(--white); }
+.tq-cuenta .tq-cuando-fecha { margin-top: 10px; font-size: 22px; font-weight: 600; color: #FFD9A5; }
+
+.tq-vacio {
+  list-style: none;
+  padding: 40px 0;
+  font-size: 30px;
+  color: var(--muted);
+}
 
 .grid {
   flex: 1;

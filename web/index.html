@@ -13,11 +13,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=15">
+<link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
-
-<div class="blackout" id="blackout" hidden></div>
 
 <div class="viewport">
   <div class="stage" id="stage">
@@ -83,6 +81,15 @@
       </div>
     </main>
 
+    <main class="tranquilo" id="tranquilo" hidden>
+      <section class="tq-proximos">
+        <div class="tq-aviso">Esta semana no hay eventos relevantes</div>
+        <div class="panel-title gold">PRÓXIMOS EVENTOS</div>
+        <ul class="tq-lista" id="tqLista"></ul>
+      </section>
+      <section class="tq-cuentas" id="tqCuentas"></section>
+    </main>
+
     <footer class="bottom">
       <div class="leyenda" id="leyenda"></div>
       <div class="spacer"></div>
@@ -96,6 +103,6 @@
   </div>
 </div>
 
-<script src="app.js?v=15"></script>
+<script src="app.js?v=17"></script>
 </body>
 </html>

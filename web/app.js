@@ -6,8 +6,6 @@ const RECARGA_PAGINA_MS = 3 * 60 * 60 * 1000;
 const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
 const UMBRAL_AGENDA = 4; // nº de eventos con hora hoy a partir del cual se activa el modo agenda
-const BLACKOUT_INICIO_MIN = 20 * 60 + 30; // 20:30, de lunes a viernes
-const BLACKOUT_FIN_MIN = 7 * 60 + 30;     // 07:30, de lunes a viernes
 
 const DIA = 86400000;
 const DOW = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
@@ -204,7 +202,6 @@ function renderDiaEventos(dk) {
 }
 
 function rotarDias() {
-  if (blackoutActivo) return; // en negro no hay nada que actualizar
   Object.keys(diaCarrusel).forEach((dk) => {
     const estado = diaCarrusel[dk];
     if (estado.events.length > 1) {
@@ -350,6 +347,131 @@ function actualizarAgenda(planos, hoy, now) {
   if (!activos.length) lista.appendChild(vacioEl("Sin eventos programados para hoy."));
 }
 
+/* ---------- semana tranquila (sin nada programado en la ventana) ---------- */
+
+const TQ_MAX_EVENTOS = 4;
+const RUTINA = /^(SG|EQUIPOS EDUCATIVOS)$/i; // reuniones habituales, no se destacan
+let modoTranquiloActivo = false;
+
+const normTitulo = (t) => t.toUpperCase().replace(/\s+/g, "");
+
+/* Ventana vacía: ni hoy ni los DIAS_VISIBLES-1 días siguientes tienen nada programado. */
+function esSemanaTranquila(planos, hoy) {
+  for (let i = 0; i < DIAS_VISIBLES; i++) {
+    if (activosEn(planos, iso(addDays(hoy, i))).length) return false;
+  }
+  return true;
+}
+
+/* Próximos eventos destacados, en orden cronológico. Sin las reuniones de rutina,
+   y fusionando los tramos repetidos del mismo evento (p. ej. un FEOE que el
+   calendario reparte en varios días seguidos) en uno solo con su rango completo. */
+function eventosDestacados(planos, hoy) {
+  const k = iso(hoy);
+  const futuros = planos
+    .filter((e) => e.s > k && !RUTINA.test(e.titulo.trim()))
+    .sort((a, b) => a.s.localeCompare(b.s) || b.e.localeCompare(a.e));
+  const out = [];
+  futuros.forEach((e) => {
+    const previo = out.find((o) => normTitulo(o.titulo) === normTitulo(e.titulo) && diffKey(o.e, e.s) <= 4);
+    if (previo) { if (e.e > previo.e) previo.e = e.e; return; }
+    out.push({ s: e.s, e: e.e, cat: e.cat, titulo: e.titulo });
+  });
+  return out;
+}
+
+/* Cuentas atrás: Navidad (del propio calendario) y verano (último día del calendario base). */
+function cuentasAtras(hoy) {
+  const k = iso(hoy);
+  const out = [];
+  const nav = (datos.vacaciones || []).find((v) => /navidad/i.test(v.title));
+  if (nav && nav.start > k) out.push({ clase: "navidad", cab: "VACACIONES DE NAVIDAD", fecha: nav.start });
+  const finCurso = datos.events
+    .filter((e) => e.kind !== "manual")
+    .reduce((m, e) => (e.end > m ? e.end : m), "");
+  if (finCurso && finCurso > k) out.push({ clase: "verano", cab: "VACACIONES DE VERANO", fecha: finCurso });
+  return out;
+}
+
+const fechaLarga = (key) => {
+  const d = parseISO(key);
+  return `${DOW_LARGO[wd(key)]} ${d.getDate()} de ${MESES[d.getMonth()]}`;
+};
+
+function actualizarTranquilo(planos, hoy) {
+  const k = iso(hoy);
+
+  const lista = $("tqLista");
+  lista.innerHTML = "";
+  const eventos = eventosDestacados(planos, hoy).slice(0, TQ_MAX_EVENTOS);
+  if (!eventos.length) {
+    const li = document.createElement("li");
+    li.className = "tq-vacio";
+    li.textContent = "No hay más eventos programados en el calendario.";
+    lista.appendChild(li);
+  }
+  eventos.forEach((e) => {
+    const cat = CATS[e.cat] || CATS.centro;
+    const d = parseISO(e.s);
+    const n = diffKey(k, e.s);
+    const rango = e.e !== e.s ? `${fechaLarga(e.s)} – ${fechaLarga(e.e)}` : fechaLarga(e.s);
+
+    const li = document.createElement("li");
+    li.className = "tq-item";
+    li.style.borderLeftColor = cat.color;
+
+    const fecha = document.createElement("div");
+    fecha.className = "tq-fecha";
+    const num = document.createElement("div");
+    num.className = "num";
+    num.textContent = d.getDate();
+    const mes = document.createElement("div");
+    mes.className = "mes";
+    mes.style.color = cat.color;
+    mes.textContent = MESES_C[d.getMonth()];
+    fecha.append(num, mes);
+
+    const cuerpo = document.createElement("div");
+    cuerpo.className = "tq-cuerpo";
+    const titulo = document.createElement("div");
+    titulo.className = "tq-titulo";
+    titulo.textContent = e.titulo;
+    const rg = document.createElement("div");
+    rg.className = "tq-rango";
+    rg.textContent = rango;
+    cuerpo.append(titulo, rg);
+
+    const cuando = document.createElement("div");
+    cuando.className = "tq-cuando";
+    cuando.textContent = n === 1 ? "MAÑANA" : `EN ${n} DÍAS`;
+
+    li.append(fecha, cuerpo, cuando);
+    lista.appendChild(li);
+  });
+
+  const cont = $("tqCuentas");
+  cont.innerHTML = "";
+  cuentasAtras(hoy).forEach((c) => {
+    const n = diffKey(k, c.fecha);
+    const box = document.createElement("div");
+    box.className = `tq-cuenta ${c.clase}`;
+    const cab = document.createElement("div");
+    cab.className = "tq-cab";
+    cab.textContent = c.cab;
+    const dias = document.createElement("div");
+    dias.className = "tq-dias";
+    dias.textContent = n;
+    const uds = document.createElement("div");
+    uds.className = "tq-uds";
+    uds.textContent = n === 1 ? "DÍA" : "DÍAS";
+    const cuando = document.createElement("div");
+    cuando.className = "tq-cuando-fecha";
+    cuando.textContent = fechaLarga(c.fecha);
+    box.append(cab, dias, uds, cuando);
+    cont.appendChild(box);
+  });
+}
+
 function renderTodo() {
   const hoy = hoyDate();
   const now = new Date();
@@ -374,6 +496,13 @@ function renderTodo() {
     $("estadoNota").hidden = true;
     actualizarAgenda(planos, hoy, now);
   }
+
+  // Semana sin nada programado: en lugar de una rejilla casi vacía, los próximos
+  // eventos destacados y las cuentas atrás a vacaciones, en grande.
+  modoTranquiloActivo = esSemanaTranquila(planos, hoy);
+  $("grid").hidden = modoTranquiloActivo;
+  $("tranquilo").hidden = !modoTranquiloActivo;
+  if (modoTranquiloActivo) actualizarTranquilo(planos, hoy);
 }
 
 /* ---------- escala del escenario 1920x1080 ---------- */
@@ -442,40 +571,11 @@ async function cargar() {
 }
 
 function tickReloj() {
-  if (blackoutActivo) return; // en negro no hay nada que actualizar
   const now = new Date();
   $("clock").textContent = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
 }
 
 let diaPintado = null;
-
-/* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
-
-/* Lunes a viernes de 20:30 a 07:30, y sábado/domingo completos. */
-function enBlackout(now) {
-  const dia = now.getDay(); // 0 = domingo … 6 = sábado
-  if (dia === 0 || dia === 6) return true;
-  const min = now.getHours() * 60 + now.getMinutes();
-  return min >= BLACKOUT_INICIO_MIN || min < BLACKOUT_FIN_MIN;
-}
-
-let blackoutActivo = false;
-
-function aplicarBlackout(now) {
-  const activo = enBlackout(now);
-  if (activo === blackoutActivo) return;
-  blackoutActivo = activo;
-  if (activo) {
-    // Entra en apagón: se oculta todo y se deja de actualizar (sin red, sin repintados)
-    // hasta que termine; no hay nadie mirando la pantalla en negro.
-    $("blackout").hidden = false;
-    liberarPantalla();
-    return;
-  }
-  // Sale del apagón: recarga completa para arrancar con el código y los datos más
-  // recientes (evita esperar hasta 15 min a que llegue el próximo refresco).
-  location.reload();
-}
 
 /* ---------- pantalla completa ---------- */
 
@@ -507,7 +607,7 @@ function activarPantallaCompletaAlPrimerGesto() {
 let wakeLockRef = null;
 
 async function mantenerPantallaActiva() {
-  if (!("wakeLock" in navigator) || blackoutActivo) return;
+  if (!("wakeLock" in navigator)) return;
   try {
     wakeLockRef = await navigator.wakeLock.request("screen");
     wakeLockRef.addEventListener("release", () => {
@@ -519,27 +619,17 @@ async function mantenerPantallaActiva() {
   }
 }
 
-/* Suelta el wake lock durante el apagón: fuera del horario de clase no hace
-   falta forzar la pantalla a permanecer encendida. */
-function liberarPantalla() {
-  if (wakeLockRef) wakeLockRef.release().catch(() => {});
-  wakeLockRef = null;
-}
-
 async function iniciar() {
   ajustarEscala();
   window.addEventListener("resize", ajustarEscala);
   activarPantallaCompletaAlPrimerGesto();
 
-  blackoutActivo = enBlackout(new Date());
-  $("blackout").hidden = !blackoutActivo;
-  if (!blackoutActivo) mantenerPantallaActiva();
+  mantenerPantallaActiva();
   document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "visible") mantenerPantallaActiva();
   });
 
   setInterval(tickReloj, 5000);
-  setInterval(() => aplicarBlackout(new Date()), 5000);
   setInterval(rotarDias, ROTACION_DIA_MS);
 
   try {
@@ -554,16 +644,14 @@ async function iniciar() {
   // de día forzamos una recarga completa (no solo un repintado) para que cualquier
   // despliegue nuevo llegue al kiosk como máximo una vez al día sin intervención manual.
   setInterval(() => {
-    if (blackoutActivo) return; // se retoma con la recarga al salir del apagón
     if (iso(hoyDate()) !== diaPintado) { location.reload(); return; }
     if (modoAgendaActivo) actualizarAgenda(eventosPlanos(), hoyDate(), new Date());
   }, 60000);
-  setInterval(() => { if (!blackoutActivo) cargar().catch(() => {}); }, REFRESCO_DATOS_MS);
+  setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
   // Recarga completa periódica: por si el cambio de día no llega a activarse
   // (pantalla apagada esa noche, etc.), esto garantiza que cualquier despliegue
-  // nuevo llegue al kiosk como mucho 3 horas después de subirlo. En negro no hace
-  // falta: ya se recarga entera en cuanto termina el apagón (aplicarBlackout).
-  setInterval(() => { if (!blackoutActivo) location.reload(); }, RECARGA_PAGINA_MS);
+  // nuevo llegue al kiosk como mucho 3 horas después de subirlo.
+  setInterval(() => location.reload(), RECARGA_PAGINA_MS);
 }
 
 iniciar();

@@ -119,9 +119,9 @@
    "start": "2026-10-13",
    "end": "2026-10-16",
    "title": "Proyecto intermodular 2º CFGM Y CFGS",
-   "source": "Emergencias",
+   "source": "Emergencias centros",
    "kind": "evento",
-   "id": "e_ac0446cca7"
+   "id": "e_79831b1605"
   },
   {
    "start": "2026-10-15",
@@ -133,27 +133,27 @@
   },
   {
    "start": "2026-10-19",
-   "end": "2026-10-21",
+   "end": "2026-10-19",
    "title": "Evaluación inicial sin nota",
-   "source": "General",
+   "source": "Erasmus",
    "kind": "evento",
-   "id": "e_1493741634"
+   "id": "e_7d6d65a30b"
   },
   {
    "start": "2026-10-19",
    "end": "2026-10-19",
-   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
-   "source": "Emergencias",
+   "title": "Evaluación inicial sin nota / CAMPAÑA HEMODONACIÓN",
+   "source": "General",
    "kind": "evento",
-   "id": "e_79a6548268"
+   "id": "e_2163208529"
   },
   {
    "start": "2026-10-20",
-   "end": "2026-10-30",
-   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
-   "source": "Emergencias",
+   "end": "2026-10-21",
+   "title": "Evaluación inicial sin nota",
+   "source": "General",
    "kind": "evento",
-   "id": "e_a3188edcc3"
+   "id": "e_0bb0df70cd"
   },
   {
    "start": "2026-10-26",
@@ -181,11 +181,11 @@
   },
   {
    "start": "2026-11-03",
-   "end": "2026-11-27",
-   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "end": "2026-11-06",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
    "source": "Emergencias",
    "kind": "evento",
-   "id": "e_758818528e"
+   "id": "e_e70a23dbf8"
   },
   {
    "start": "2026-11-06",
@@ -194,6 +194,14 @@
    "source": "General",
    "kind": "evento",
    "id": "e_488c30e753"
+  },
+  {
+   "start": "2026-11-07",
+   "end": "2026-11-07",
+   "title": "Proyecto intermodular 2º CFGM Y CFGS",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_5f731be711"
   },
   {
    "start": "2026-11-09",
@@ -206,10 +214,34 @@
   {
    "start": "2026-11-09",
    "end": "2026-11-09",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_69143ca209"
+  },
+  {
+   "start": "2026-11-09",
+   "end": "2026-11-27",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_e025069b96"
+  },
+  {
+   "start": "2026-11-09",
+   "end": "2026-11-09",
    "title": "Familias: Suspiros y Bienmesabe",
    "source": "General",
    "kind": "evento",
    "id": "e_24c1463f69"
+  },
+  {
+   "start": "2026-11-10",
+   "end": "2026-11-10",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_7de32e90dc"
   },
   {
    "start": "2026-11-11",
@@ -220,12 +252,100 @@
    "id": "e_e4b9cad2ea"
   },
   {
+   "start": "2026-11-11",
+   "end": "2026-11-11",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_a02191e870"
+  },
+  {
+   "start": "2026-11-12",
+   "end": "2026-11-12",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_c8e19e9210"
+  },
+  {
+   "start": "2026-11-13",
+   "end": "2026-11-16",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_c9fe58d468"
+  },
+  {
+   "start": "2026-11-17",
+   "end": "2026-11-17",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_f19112ec24"
+  },
+  {
+   "start": "2026-11-18",
+   "end": "2026-11-18",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_355a3a150b"
+  },
+  {
+   "start": "2026-11-19",
+   "end": "2026-11-19",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_c7dc48615b"
+  },
+  {
+   "start": "2026-11-20",
+   "end": "2026-11-23",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_709a92cae0"
+  },
+  {
    "start": "2026-11-20",
    "end": "2026-11-20",
    "title": "NETWORKING",
    "source": "General",
    "kind": "evento",
    "id": "e_98d302dd34"
+  },
+  {
+   "start": "2026-11-24",
+   "end": "2026-11-24",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_436729b669"
+  },
+  {
+   "start": "2026-11-25",
+   "end": "2026-11-25",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_8537558fce"
+  },
+  {
+   "start": "2026-11-26",
+   "end": "2026-11-26",
+   "title": "FEOE 2CFGSConsorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_394477b4fd"
+  },
+  {
+   "start": "2026-11-27",
+   "end": "2026-11-27",
+   "title": "FEOE 2CFGS Consorcio de Emergencias de GC",
+   "source": "Emergencias",
+   "kind": "evento",
+   "id": "e_b0cffbbb37"
   },
   {
    "start": "2026-11-30",
@@ -317,27 +437,11 @@
   },
   {
    "start": "2027-01-11",
-   "end": "2027-01-11",
-   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC - 220H GS/100",
-   "source": "Emergencias centros",
-   "kind": "evento",
-   "id": "e_331a2b33c0"
-  },
-  {
-   "start": "2027-01-11",
    "end": "2027-01-15",
    "title": "Proyecto intermodular 2º CFGM Y CFGS",
    "source": "General",
    "kind": "evento",
    "id": "e_f8e9355a59"
-  },
-  {
-   "start": "2027-01-12",
-   "end": "2027-02-05",
-   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
-   "source": "Emergencias centros",
-   "kind": "evento",
-   "id": "e_5ae94e3a8e"
   },
   {
    "start": "2027-01-15",
@@ -354,6 +458,14 @@
    "source": "Erasmus",
    "kind": "evento",
    "id": "e_7a2be55dcd"
+  },
+  {
+   "start": "2027-01-18",
+   "end": "2027-02-05",
+   "title": "FEOE 2CFGS y 2CFGM Consorcio de Emergencias de GC",
+   "source": "Emergencias centros",
+   "kind": "evento",
+   "id": "e_8a119e40b4"
   },
   {
    "start": "2027-01-18",
