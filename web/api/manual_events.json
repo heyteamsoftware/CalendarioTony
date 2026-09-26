@@ -1,1 +1,446 @@
-[]
+[
+    {
+        "id": "m_6a9d2244249341.75434212",
+        "date": "2026-09-16",
+        "time": "09:00",
+        "title": "Presentación de Ciclos · Servicios Socioculturales y a la Comunidad — 1.º y 2.º CFGS Integración Social · 1.º y 2.º CFGS Educación Infantil"
+    },
+    {
+        "id": "m_6a9d22443c5e02.98596833",
+        "date": "2026-09-16",
+        "time": "09:45",
+        "title": "Presentación de Ciclos · Actividades Físicas y Deportivas — 1.º y 2.º CFGS Acondicionamiento Físico · 1.º y 2.º CFGS Enseñanza y Animación Sociodeportiva"
+    },
+    {
+        "id": "m_6a9d224450ba19.74519406",
+        "date": "2026-09-16",
+        "time": "10:30",
+        "title": "Presentación de Ciclos · Madera, Mueble y Corcho — 1.º y 2.º CFGB Carpintería y Mueble · 1.º y 2.º CFGM Carpintería y Mueble"
+    },
+    {
+        "id": "m_6a9d224464d425.45424523",
+        "date": "2026-09-16",
+        "time": "11:15",
+        "title": "Presentación de Ciclos · Instalación y Mantenimiento — 1.º y 2.º CFGB Fabricación y Montaje · 1.º y 2.º CFGM Mantenimiento Electromecánico"
+    },
+    {
+        "id": "m_6a9d224478cc80.81777251",
+        "date": "2026-09-16",
+        "time": "12:00",
+        "title": "Presentación de Ciclos · IFC +21 e Industrias Alimentarias — IFC+21 Actividades Auxiliares de Almacén · IFC+21 Operaciones Básicas de Restaurante y Bar · 1.º CFG Actividades de Panadería y Pastelería"
+    },
+    {
+        "id": "m_6a9d22448d3ec2.04991986",
+        "date": "2026-09-16",
+        "time": "12:45",
+        "title": "Presentación de Ciclos · Sanidad — 1.º CFGM Cuidados Auxiliares de Enfermería · 1.º y 2.º CFGS Higiene Bucodental"
+    },
+    {
+        "id": "m_6a9d2244a0d2a7.25587366",
+        "date": "2026-09-16",
+        "time": "15:00",
+        "title": "Presentación de Ciclos · Sanidad — 1.º CFGS Higiene Bucodental"
+    },
+    {
+        "id": "m_6a9d2244b48c09.97751621",
+        "date": "2026-09-16",
+        "time": "15:00",
+        "title": "Presentación de Ciclos · Servicios Socioculturales y a la Comunidad — 1.º y 2.º CFGM Atención a Personas en Situación de Dependencia"
+    },
+    {
+        "id": "m_6a9d2244c7a327.20800353",
+        "date": "2026-09-16",
+        "time": "15:45",
+        "title": "Presentación de Ciclos · Seguridad y Medio Ambiente — 1.º y 2.º CFGM Seguridad · 1.º y 2.º CFGM Emergencias y Protección Civil"
+    },
+    {
+        "id": "m_6a9d2244db2dc4.24926632",
+        "date": "2026-09-16",
+        "time": "16:00",
+        "title": "Presentación de Ciclos · Seguridad y Medio Ambiente — 1.º y 2.º CFGS Coordinación de Emergencias y Protección Civil · 1.º y 2.º CFGS Prevención de Riesgos Profesionales"
+    },
+    {
+        "id": "m_6a9d2244ee8cb5.59207646",
+        "date": "2026-09-16",
+        "time": "16:45",
+        "title": "Presentación de Ciclos · Instalación y Mantenimiento — 1.º y 2.º CFGS Mecatrónica Industrial"
+    },
+    {
+        "id": "m_65adfb17a4ffa.14337280",
+        "date": "2026-09-07",
+        "time": "08:30",
+        "endTime": "10:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65adfb17a7823.16864011",
+        "date": "2026-09-07",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65adfb17aa043.07782390",
+        "date": "2026-09-07",
+        "time": "11:00",
+        "endTime": "11:30",
+        "title": "Formación exprés · Guía del Profesorado (Joselin, Cristo y Fernando) — Solicitud de actividades complementarias y extraescolares · Uso de GSuite educativo · Gestión de aulas de informática y otros recursos digitales · Gestión de protección de datos · Redes sociales · Guía del Profesorado",
+        "location": "La Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65adfb17ac94e.03080064",
+        "date": "2026-09-07",
+        "time": "11:30",
+        "endTime": "13:00",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65adfb17af260.60148646",
+        "date": "2026-09-07",
+        "time": "13:00",
+        "endTime": "13:30",
+        "title": "Claustro",
+        "location": "La Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b07fb3f4a59.20238899",
+        "date": "2026-09-09",
+        "time": "08:30",
+        "endTime": "10:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b07fb3f7228.52075603",
+        "date": "2026-09-09",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b07fb3f9acd.54831135",
+        "date": "2026-09-09",
+        "time": "11:00",
+        "endTime": "12:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b07fb3fc274.67029897",
+        "date": "2026-09-09",
+        "time": "12:30",
+        "endTime": "13:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b07fb3feb7e.29852284",
+        "date": "2026-09-09",
+        "time": "12:30",
+        "endTime": "13:30",
+        "title": "Seguimiento CFGB, IFC+21 y semipresencial — Sabina, Aruma y Trini (Sala de Profesores) · Cristo (Aula Semi)",
+        "location": "Sala de Profesores / Aula Semi",
+        "audience": "Profesorado implicado en estas enseñanzas"
+    },
+    {
+        "id": "m_65b1bccb47d83.36487295",
+        "date": "2026-09-10",
+        "time": "08:30",
+        "endTime": "09:30",
+        "title": "Formación exprés · Plan de Autoprotección y Prevención del Centro (Enrique Tadeo)",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b1bccb4a68b.50843808",
+        "date": "2026-09-10",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b1bccb4cecc.10506101",
+        "date": "2026-09-10",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Radio Atlante",
+        "location": "Radio (ATECA)",
+        "audience": "Profesorado Comisión de Radio Atlante"
+    },
+    {
+        "id": "m_65b1bccb4f828.87499270",
+        "date": "2026-09-10",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b1bccb5221b.74318128",
+        "date": "2026-09-10",
+        "time": "11:00",
+        "endTime": "13:00",
+        "title": "Gallarditos conociendo La Isleta",
+        "location": "La Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b1bccb54a57.05981223",
+        "date": "2026-09-10",
+        "time": "13:00",
+        "endTime": "13:30",
+        "title": "Secretaría · Gestión de llaves y mandos — durante este espacio de tiempo podrán seguir yendo a secretaría para gestionar la entrega del mando del coche (recuerden llevar el dinero justo)",
+        "location": "Secretaría",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b1bccb5736d.65814999",
+        "date": "2026-09-10",
+        "time": "13:00",
+        "endTime": "13:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b302b055562.87345175",
+        "date": "2026-09-11",
+        "time": "08:30",
+        "endTime": "09:30",
+        "title": "Formación exprés · Indicaciones de las programaciones y cuaderno de aula I (Montse y Vidina) — CFGM y CFGS modalidad presencial",
+        "location": "Plaza",
+        "audience": "Profesorado de Grados Medios y Superior (modalidad presencial)"
+    },
+    {
+        "id": "m_65b302b057d0d.40626441",
+        "date": "2026-09-11",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Trabajo práctico del profesorado: Programaciones",
+        "location": "Plaza",
+        "audience": "Profesorado de Grados Medios y Superior (modalidad presencial)"
+    },
+    {
+        "id": "m_65b302b05a4a5.81603325",
+        "date": "2026-09-11",
+        "time": "08:30",
+        "endTime": "10:30",
+        "title": "Organización y trabajo de los Grados Básicos e IFC+21",
+        "location": "Sala de Profesores",
+        "audience": "Profesorado exclusivo de Grados Básicos e IFC+21"
+    },
+    {
+        "id": "m_65b302b05cd9d.48262093",
+        "date": "2026-09-11",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b302b05f57a.38822800",
+        "date": "2026-09-11",
+        "time": "11:00",
+        "endTime": "11:30",
+        "title": "Reunión Jefes Departamento: Proyectos Intermodulares / Centro (Minerva, Aythami y Vidina)",
+        "location": "",
+        "audience": "Jefes de Departamento · Jefatura de Estudios · Vicedirección · Coordinadores de Proyectos"
+    },
+    {
+        "id": "m_65b302b061f0d.65250903",
+        "date": "2026-09-11",
+        "time": "11:00",
+        "endTime": "11:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b302b064686.47001440",
+        "date": "2026-09-11",
+        "time": "11:30",
+        "endTime": "12:00",
+        "title": "Trabajo por departamentos / Trabajo del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b302b06702d.12827952",
+        "date": "2026-09-11",
+        "time": "12:30",
+        "endTime": "13:30",
+        "title": "Explicación/trabajo de propuestas · Proyecto Intermodular/centro asociadas al Ciclo Formativo",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado (quien comparte equipos educativos debe rotar por los grupos)"
+    },
+    {
+        "id": "m_65b302b069baa.32070384",
+        "date": "2026-09-11",
+        "time": "12:30",
+        "endTime": "12:55",
+        "title": "Reunión por ciclos · Enseñanza y Animación Sociodeportiva · Mantenimiento Electromecánico · Higiene Bucodental (los 3 grupos) · Emergencias / Coordinación de Emergencias · Atención a Personas en Situación de Dependencia · Integración Social",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "1.º y 2.º de los ciclos citados"
+    },
+    {
+        "id": "m_65b302b06c3f6.33187824",
+        "date": "2026-09-11",
+        "time": "12:55",
+        "endTime": "13:30",
+        "title": "Reunión por ciclos · Acondicionamiento Físico · Mecatrónica Industrial · Carpintería y Mueble · Seguridad / Prevención de Riesgos Profesionales · Educación Infantil",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "1.º y 2.º de los ciclos citados"
+    },
+    {
+        "id": "m_65b302b06ebb8.09408682",
+        "date": "2026-09-11",
+        "time": "14:00",
+        "endTime": "",
+        "title": "¡Almuerzo de bienvenida!",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85d9f20d.87560603",
+        "date": "2026-09-14",
+        "time": "08:30",
+        "endTime": "09:30",
+        "title": "Formación exprés · Indicaciones de las programaciones y cuaderno de aula II (Montse y Vidina) — Semipresencial",
+        "location": "Plaza",
+        "audience": "Profesorado que imparte módulos en Grados Superior (modalidad semipresencial)"
+    },
+    {
+        "id": "m_65b6c85da1a7a.92493010",
+        "date": "2026-09-14",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Convivencia/Orientación (Alberto) — Plan de convivencia del Centro · Funcionamiento de los partes y expedientes",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85da42ce.96025219",
+        "date": "2026-09-14",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Tutorías - Gestión del alumnado y Pincel Ekade (Jonatan) — Faltas del alumnado · Apercibimientos · Temas administrativos/bajas de oficio · Módulos y FEOE pendientes",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85da6ac6.13898948",
+        "date": "2026-09-14",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Presentaciones alumnado (Cristo)",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85da9303.62578601",
+        "date": "2026-09-14",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85dabcbd.39160386",
+        "date": "2026-09-14",
+        "time": "11:00",
+        "endTime": "12:00",
+        "title": "Formación exprés · Pantallas digitales (Fernando) — Gestión del material",
+        "location": "Emprendimiento",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85dae6d5.32996068",
+        "date": "2026-09-14",
+        "time": "12:00",
+        "endTime": "13:30",
+        "title": "Trabajo personal del profesorado",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c85db0fd6.69568977",
+        "date": "2026-09-14",
+        "time": "12:00",
+        "endTime": "13:30",
+        "title": "Reuniones de ciclos (pendientes del viernes)",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c8c02827a.02942549",
+        "date": "2026-09-15",
+        "time": "08:30",
+        "endTime": "09:30",
+        "title": "Formación exprés · Jefatura de Estudios — Tarjetas de identificación y fichaje · Taquillas",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c8c02aa4c.43153120",
+        "date": "2026-09-15",
+        "time": "09:30",
+        "endTime": "10:30",
+        "title": "Conoce el Tony (Joselin y Raquel)",
+        "location": "Plaza",
+        "audience": ""
+    },
+    {
+        "id": "m_65b6c8c02d262.85400652",
+        "date": "2026-09-15",
+        "time": "10:30",
+        "endTime": "11:00",
+        "title": "Desayuno / Descanso",
+        "location": "",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c8c02fbb6.01904478",
+        "date": "2026-09-15",
+        "time": "11:00",
+        "endTime": "13:00",
+        "title": "Reuniones de departamento — Preparación presentaciones · Finalizar la gestión de aulas · Diseño y desarrollo de programaciones · Creación de aulas virtuales · Formación pizarra digital por grupos",
+        "location": "Aulas asignadas / Talleres",
+        "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65b6c8c032568.21579764",
+        "date": "2026-09-15",
+        "time": "11:00",
+        "endTime": "13:00",
+        "title": "Coordinación jefaturas de departamento — \"Macroconvivencia CIFP Tony Gallardo\"",
+        "location": "Working Area",
+        "audience": "Jefes de Departamento / Vicedirección"
+    },
+    {
+        "id": "m_65b6c8c034dae.19908252",
+        "date": "2026-09-15",
+        "time": "13:00",
+        "endTime": "13:30",
+        "title": "Claustro — Entrega de horarios",
+        "location": "Plaza",
+        "audience": "Todo el profesorado"
+    }
+]
