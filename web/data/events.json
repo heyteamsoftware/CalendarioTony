@@ -76,36 +76,12 @@
    "id": "e_5dc422c827"
   },
   {
-   "start": "2026-09-18",
-   "end": "2026-09-20",
-   "title": "SG",
-   "source": "General",
-   "kind": "evento",
-   "id": "e_c314ed5cc4"
-  },
-  {
    "start": "2026-09-21",
    "end": "2026-09-21",
    "title": "INICIO FCT TCAE",
    "source": "General",
    "kind": "evento",
    "id": "e_4f99f57fae"
-  },
-  {
-   "start": "2026-09-21",
-   "end": "2026-09-21",
-   "title": "SG",
-   "source": "Erasmus",
-   "kind": "evento",
-   "id": "e_4991642d51"
-  },
-  {
-   "start": "2026-09-22",
-   "end": "2026-09-28",
-   "title": "SG",
-   "source": "General",
-   "kind": "evento",
-   "id": "e_e9dfcfb62d"
   },
   {
    "start": "2026-09-30",

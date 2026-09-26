@@ -350,7 +350,7 @@ function actualizarAgenda(planos, hoy, now) {
 /* ---------- semana tranquila (sin nada programado en la ventana) ---------- */
 
 const TQ_MAX_EVENTOS = 4;
-const RUTINA = /^(SG|EQUIPOS EDUCATIVOS)$/i; // reuniones habituales, no se destacan
+const RUTINA = /^EQUIPOS EDUCATIVOS$/i; // reuniones habituales, no se destacan
 let modoTranquiloActivo = false;
 
 const normTitulo = (t) => t.toUpperCase().replace(/\s+/g, "");

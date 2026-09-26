@@ -274,6 +274,8 @@ def main():
         all_events.extend(ev)
 
     all_events = dedupe(all_events)
+    # "SG" (actividad de centro) no aporta nada al calendario: se descarta
+    all_events = [e for e in all_events if e["title"].strip().upper() != "SG"]
     festivos, vacaciones = parse_legend(wb[list(HOJAS)[0]], CURSO_INICIO)
 
     def palabras(t):
