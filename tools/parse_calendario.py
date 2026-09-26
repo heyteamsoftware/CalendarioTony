@@ -260,8 +260,9 @@ def parse_legend(ws, curso_inicio):
 
 
 def main():
-    src = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(
-        r"C:\Users\aidan\Downloads\Calendario 2026-2027.xlsx")
+    if len(sys.argv) < 2:
+        sys.exit("Uso: python parse_calendario.py <calendario.xlsx> [salida.json]")
+    src = Path(sys.argv[1])
     out = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).parent.parent / "web" / "data" / "events.json"
 
     wb = openpyxl.load_workbook(src, data_only=True)
