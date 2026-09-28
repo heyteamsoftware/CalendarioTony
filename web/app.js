@@ -351,8 +351,11 @@ function actualizarAgenda(planos, hoy, now) {
 
 const TQ_VENTANA_DIAS = 2; // hoy + mañana
 const TQ_MAX_EVENTOS = 4;
+const TQ_ALTERNAR_MS = 60 * 60 * 1000; // en día tranquilo, alterna con la vista normal cada hora
 const RUTINA = /^EQUIPOS EDUCATIVOS$/i; // reuniones habituales, no se destacan
 let modoTranquiloActivo = false;
+let planosCache = null;
+let hoyCache = null;
 
 const normTitulo = (t) => t.toUpperCase().replace(/\s+/g, "");
 
@@ -473,6 +476,22 @@ function actualizarTranquilo(planos, hoy) {
   });
 }
 
+/* En día tranquilo, alterna cada hora entre la vista de día tranquilo y la
+   rejilla normal (en vez de dejar una fijada todo el día). El bloque de hora
+   (época Unix / TQ_ALTERNAR_MS) es el mismo para cualquier pantalla que lo
+   calcule en ese momento, así que no hace falta guardar ni sincronizar nada. */
+function tocaMostrarTranquilo(now) {
+  if (!modoTranquiloActivo) return false;
+  return Math.floor(now.getTime() / TQ_ALTERNAR_MS) % 2 === 0;
+}
+
+function aplicarVisibilidadTranquilo(now) {
+  const mostrar = tocaMostrarTranquilo(now);
+  $("grid").hidden = mostrar;
+  $("tranquilo").hidden = !mostrar;
+  if (mostrar && planosCache) actualizarTranquilo(planosCache, hoyCache);
+}
+
 function renderTodo() {
   const hoy = hoyDate();
   const now = new Date();
@@ -498,12 +517,12 @@ function renderTodo() {
     actualizarAgenda(planos, hoy, now);
   }
 
-  // Hoy y mañana sin nada programado: en lugar de una rejilla casi vacía, los
-  // próximos eventos destacados y las cuentas atrás a vacaciones, en grande.
+  // Hoy y mañana sin nada programado: alterna cada hora entre la rejilla normal
+  // y los próximos eventos destacados + cuentas atrás a vacaciones, en grande.
   modoTranquiloActivo = esDiaTranquilo(planos, hoy);
-  $("grid").hidden = modoTranquiloActivo;
-  $("tranquilo").hidden = !modoTranquiloActivo;
-  if (modoTranquiloActivo) actualizarTranquilo(planos, hoy);
+  planosCache = planos;
+  hoyCache = hoy;
+  aplicarVisibilidadTranquilo(now);
 }
 
 /* ---------- escala del escenario 1920x1080 ---------- */
@@ -646,7 +665,9 @@ async function iniciar() {
   // despliegue nuevo llegue al kiosk como máximo una vez al día sin intervención manual.
   setInterval(() => {
     if (iso(hoyDate()) !== diaPintado) { location.reload(); return; }
-    if (modoAgendaActivo) actualizarAgenda(eventosPlanos(), hoyDate(), new Date());
+    const now = new Date();
+    if (modoAgendaActivo) actualizarAgenda(eventosPlanos(), hoyDate(), now);
+    if (modoTranquiloActivo) aplicarVisibilidadTranquilo(now);
   }, 60000);
   setInterval(() => cargar().catch(() => {}), REFRESCO_DATOS_MS);
   // Recarga completa periódica: por si el cambio de día no llega a activarse
