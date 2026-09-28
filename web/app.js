@@ -347,17 +347,18 @@ function actualizarAgenda(planos, hoy, now) {
   if (!activos.length) lista.appendChild(vacioEl("Sin eventos programados para hoy."));
 }
 
-/* ---------- semana tranquila (sin nada programado en la ventana) ---------- */
+/* ---------- día tranquilo (sin nada programado hoy ni mañana) ---------- */
 
+const TQ_VENTANA_DIAS = 2; // hoy + mañana
 const TQ_MAX_EVENTOS = 4;
 const RUTINA = /^EQUIPOS EDUCATIVOS$/i; // reuniones habituales, no se destacan
 let modoTranquiloActivo = false;
 
 const normTitulo = (t) => t.toUpperCase().replace(/\s+/g, "");
 
-/* Ventana vacía: ni hoy ni los DIAS_VISIBLES-1 días siguientes tienen nada programado. */
-function esSemanaTranquila(planos, hoy) {
-  for (let i = 0; i < DIAS_VISIBLES; i++) {
+/* Ventana vacía: ni hoy ni los TQ_VENTANA_DIAS-1 días siguientes tienen nada programado. */
+function esDiaTranquilo(planos, hoy) {
+  for (let i = 0; i < TQ_VENTANA_DIAS; i++) {
     if (activosEn(planos, iso(addDays(hoy, i))).length) return false;
   }
   return true;
@@ -497,9 +498,9 @@ function renderTodo() {
     actualizarAgenda(planos, hoy, now);
   }
 
-  // Semana sin nada programado: en lugar de una rejilla casi vacía, los próximos
-  // eventos destacados y las cuentas atrás a vacaciones, en grande.
-  modoTranquiloActivo = esSemanaTranquila(planos, hoy);
+  // Hoy y mañana sin nada programado: en lugar de una rejilla casi vacía, los
+  // próximos eventos destacados y las cuentas atrás a vacaciones, en grande.
+  modoTranquiloActivo = esDiaTranquilo(planos, hoy);
   $("grid").hidden = modoTranquiloActivo;
   $("tranquilo").hidden = !modoTranquiloActivo;
   if (modoTranquiloActivo) actualizarTranquilo(planos, hoy);
