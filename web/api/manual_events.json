@@ -442,5 +442,41 @@
         "title": "Claustro — Entrega de horarios",
         "location": "Plaza",
         "audience": "Todo el profesorado"
+    },
+    {
+        "id": "m_65ca646b733f0.26259964",
+        "date": "2026-09-30",
+        "time": "14:00",
+        "endTime": "14:15",
+        "title": "Equipos Educativos",
+        "location": "",
+        "audience": "2º ACO · 1º MTTO · 1º MADERA · 1º BUCO M · 1º SEG · 1º EMER · 1º TSEI · 1º TAPSD"
+    },
+    {
+        "id": "m_65ca646b75d1f.11861587",
+        "date": "2026-09-30",
+        "time": "14:15",
+        "endTime": "14:30",
+        "title": "Equipos Educativos",
+        "location": "",
+        "audience": "1º ACO · 2º MTTO · 1º BUCO T · 2º SEG · 2º EMER · 2º TSEI · 2º TAPSD"
+    },
+    {
+        "id": "m_65ca646b784de.54909237",
+        "date": "2026-09-30",
+        "time": "14:30",
+        "endTime": "14:45",
+        "title": "Equipos Educativos",
+        "location": "",
+        "audience": "1º TSEAS · 1º MECA · 2º MADERA · 2º BUCO · 1º PRP · 1º CEPC · 1º TSIS"
+    },
+    {
+        "id": "m_65ca646b7acf5.01885087",
+        "date": "2026-09-30",
+        "time": "14:45",
+        "endTime": "15:00",
+        "title": "Equipos Educativos",
+        "location": "",
+        "audience": "2º TSEAS · 2º MECA · 1º CAE · 2º PRP · 2º CEPC · 2º TSIS"
     }
 ]
