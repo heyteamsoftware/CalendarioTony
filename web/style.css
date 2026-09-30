@@ -33,6 +33,16 @@ html, body {
 
 @keyframes tgblink { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
 
+/* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
+
+.blackout {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9999;
+}
+.blackout[hidden] { display: none; }
+
 /* ---------- escenario fijo 1920x1080, escalado a la ventana ---------- */
 
 .viewport {
