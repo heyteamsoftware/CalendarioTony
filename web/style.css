@@ -40,6 +40,7 @@ html, body {
   inset: 0;
   background: #000;
   z-index: 9999;
+  cursor: none; /* que parezca apagada de verdad, sin ni siquiera el cursor visible */
 }
 .blackout[hidden] { display: none; }
 
