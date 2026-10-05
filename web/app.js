@@ -7,7 +7,7 @@ const DIAS_VISIBLES = 5; // el día 0 (hoy) es siempre el primero de la ventana
 const MAX_PROXIMAS = 6;
 const UMBRAL_AGENDA = 4; // nº de eventos con hora hoy a partir del cual se activa el modo agenda
 const BLACKOUT_INICIO_MIN = 20 * 60;      // 20:00, de lunes a viernes
-const BLACKOUT_FIN_MIN = 8 * 60 + 15;     // 08:15, de lunes a viernes
+const BLACKOUT_FIN_MIN = 8 * 60;          // 08:00, de lunes a viernes
 
 const DIA = 86400000;
 const DOW = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
@@ -603,7 +603,7 @@ let diaPintado = null;
 
 /* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
 
-/* Lunes a viernes de 20:00 a 08:15, y sábado/domingo completos. */
+/* Lunes a viernes de 20:00 a 08:00, y sábado/domingo completos. */
 function enBlackout(now) {
   const dia = now.getDay(); // 0 = domingo … 6 = sábado
   if (dia === 0 || dia === 6) return true;
