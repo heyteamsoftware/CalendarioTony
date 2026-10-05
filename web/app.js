@@ -350,24 +350,18 @@ function actualizarAgenda(planos, hoy, now) {
   if (!activos.length) lista.appendChild(vacioEl("Sin eventos programados para hoy."));
 }
 
-/* ---------- día tranquilo (sin nada programado hoy ni mañana) ---------- */
+/* ---------- día tranquilo (sin nada programado hoy) ---------- */
 
-const TQ_VENTANA_DIAS = 2; // hoy + mañana
 const TQ_MAX_EVENTOS = 4;
-const TQ_ALTERNAR_MS = 60 * 60 * 1000; // en día tranquilo, alterna con la vista normal cada hora
 const RUTINA = /^EQUIPOS EDUCATIVOS$/i; // reuniones habituales, no se destacan
 let modoTranquiloActivo = false;
-let planosCache = null;
-let hoyCache = null;
 
 const normTitulo = (t) => t.toUpperCase().replace(/\s+/g, "");
 
-/* Ventana vacía: ni hoy ni los TQ_VENTANA_DIAS-1 días siguientes tienen nada programado. */
+/* Día tranquilo: hoy no hay nada programado (ni eventos, ni festivo, ni vacaciones).
+   Se mantiene así todo el día, sin alternar con la vista normal. */
 function esDiaTranquilo(planos, hoy) {
-  for (let i = 0; i < TQ_VENTANA_DIAS; i++) {
-    if (activosEn(planos, iso(addDays(hoy, i))).length) return false;
-  }
-  return true;
+  return activosEn(planos, iso(hoy)).length === 0;
 }
 
 /* Próximos eventos destacados, en orden cronológico. Sin las reuniones de rutina,
@@ -479,22 +473,6 @@ function actualizarTranquilo(planos, hoy) {
   });
 }
 
-/* En día tranquilo, alterna cada hora entre la vista de día tranquilo y la
-   rejilla normal (en vez de dejar una fijada todo el día). El bloque de hora
-   (época Unix / TQ_ALTERNAR_MS) es el mismo para cualquier pantalla que lo
-   calcule en ese momento, así que no hace falta guardar ni sincronizar nada. */
-function tocaMostrarTranquilo(now) {
-  if (!modoTranquiloActivo) return false;
-  return Math.floor(now.getTime() / TQ_ALTERNAR_MS) % 2 === 0;
-}
-
-function aplicarVisibilidadTranquilo(now) {
-  const mostrar = tocaMostrarTranquilo(now);
-  $("grid").hidden = mostrar;
-  $("tranquilo").hidden = !mostrar;
-  if (mostrar && planosCache) actualizarTranquilo(planosCache, hoyCache);
-}
-
 function renderTodo() {
   const hoy = hoyDate();
   const now = new Date();
@@ -520,12 +498,12 @@ function renderTodo() {
     actualizarAgenda(planos, hoy, now);
   }
 
-  // Hoy y mañana sin nada programado: alterna cada hora entre la rejilla normal
-  // y los próximos eventos destacados + cuentas atrás a vacaciones, en grande.
+  // Hoy sin nada programado: todo el día se muestran los próximos eventos
+  // destacados + cuentas atrás a vacaciones, en grande, en lugar de la rejilla.
   modoTranquiloActivo = esDiaTranquilo(planos, hoy);
-  planosCache = planos;
-  hoyCache = hoy;
-  aplicarVisibilidadTranquilo(now);
+  $("grid").hidden = modoTranquiloActivo;
+  $("tranquilo").hidden = !modoTranquiloActivo;
+  if (modoTranquiloActivo) actualizarTranquilo(planos, hoy);
 }
 
 /* ---------- escala del escenario 1920x1080 ---------- */
@@ -710,7 +688,6 @@ async function iniciar() {
     if (iso(hoyDate()) !== diaPintado) { location.reload(); return; }
     const now = new Date();
     if (modoAgendaActivo) actualizarAgenda(eventosPlanos(), hoyDate(), now);
-    if (modoTranquiloActivo) aplicarVisibilidadTranquilo(now);
   }, 60000);
   setInterval(() => { if (!blackoutActivo) cargar().catch(() => {}); }, REFRESCO_DATOS_MS);
   // Recarga completa periódica: por si el cambio de día no llega a activarse
