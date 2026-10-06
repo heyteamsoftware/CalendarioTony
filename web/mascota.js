@@ -13,6 +13,11 @@
  *   (con curiosidades al azar, sin tocar el contador real). Con ?negro=0 se
  *   puede probar fuera del horario del apagón.
  *
+ * Además, cada 10 minutos (a los :05, :15, :25…) Gallardito se asoma por uno de
+ * los cuatro bordes de la pantalla haciendo una gracia, sin sonido ni texto.
+ * Pruebas: ?asoma=1 (en bucle). Para fijar borde y gracia: &borde=abajo|arriba|izq|der
+ * y &gracia=mira|cucu|baila.
+ *
  * Usa variables de app.js: modoTranquiloActivo, blackoutActivo, hoyDate, iso.
  */
 (() => {
@@ -161,7 +166,7 @@
   }
 
   function revisar() {
-    if (enCurso) return;
+    if (enCurso || asomando) return;
     const activo = typeof modoTranquiloActivo !== "undefined" && modoTranquiloActivo &&
                    typeof blackoutActivo !== "undefined" && !blackoutActivo;
     if (!activo) return;
@@ -181,6 +186,67 @@
     }
   }
 
+  /* ---------- Gallardito se asoma por los bordes (cada 10 min, sin sonido) ---------- */
+
+  const ASOMA_CADA_MIN = 10;
+  const ASOMA_MINUTO = 5;          // en los :05, :15, :25… (los paseos son en :00, :20 y :40)
+  const ASOMA_DURACION_MS = { mira: 5400, cucu: 5800, baila: 5600 };
+  const BORDES = ["abajo", "arriba", "izq", "der"];
+  const GRACIAS = ["mira", "cucu", "baila"];
+
+  const params = new URLSearchParams(location.search);
+  const ASOMA_DEMO = params.get("asoma") === "1";
+  const aleatorio = (lista) => lista[Math.floor(Math.random() * lista.length)];
+
+  let asomando = false;
+  let ultimaAsomada = "";
+  let ultimoBorde = "";
+
+  async function asomarse(borde, gracia) {
+    if (asomando) return;
+    asomando = true;
+    const el = $m("asoma");
+    try {
+      // al azar, pero nunca dos veces seguidas por el mismo borde
+      if (!BORDES.includes(borde)) borde = aleatorio(BORDES.filter((b) => b !== ultimoBorde));
+      ultimoBorde = borde;
+      if (!GRACIAS.includes(gracia)) gracia = aleatorio(GRACIAS);
+      $m("asomaImg").src = `img/mascota/asoma-${borde}.png`;
+      // posición al azar a lo largo del borde, sin salirse de la pantalla
+      el.style.left = el.style.top = "";
+      if (borde === "abajo" || borde === "arriba") el.style.left = (8 + Math.random() * 68) + "%";
+      else el.style.top = (10 + Math.random() * 56) + "%";
+      el.className = `asoma ${borde} ${gracia}`;
+      el.hidden = false;
+      await esperar(ASOMA_DURACION_MS[gracia] + 150);
+    } finally {
+      el.hidden = true;
+      el.className = "asoma";
+      asomando = false;
+    }
+  }
+
+  function revisarAsoma() {
+    if (asomando || enCurso) return;
+    if (typeof blackoutActivo !== "undefined" && blackoutActivo) return;
+    const ahora = new Date();
+    if (ahora.getMinutes() % ASOMA_CADA_MIN !== ASOMA_MINUTO || ahora.getSeconds() > 20) return;
+    const id = `${ahora.getDate()} ${ahora.getHours()}:${ahora.getMinutes()}`;
+    if (id === ultimaAsomada) return;
+    ultimaAsomada = id;
+    asomarse();
+  }
+
+  async function bucleAsoma() {
+    await esperar(1500);
+    for (;;) {
+      await asomarse(params.get("borde"), params.get("gracia"));
+      await esperar(2500);
+    }
+  }
+
+  window.asomarseAhora = asomarse;
+
   // Para probar a mano desde la consola: mascotaAhora() o mascotaAhora("texto")
   window.mascotaAhora = async (texto) => {
     if (enCurso) return;
@@ -193,4 +259,6 @@
 
   if (DEMO) bucleDemo();
   else setInterval(revisar, 5000);
+  if (ASOMA_DEMO) bucleAsoma();
+  else setInterval(revisarAsoma, 5000);
 })();

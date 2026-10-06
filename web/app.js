@@ -511,8 +511,10 @@ function renderTodo() {
 function ajustarEscala() {
   const stage = $("stage");
   const vw = window.innerWidth, vh = window.innerHeight;
+  if (!vw || !vh) return; // ventana sin tamaño (oculta): se recalcula al volver
   const s = Math.min(vw / 1920, vh / 1080);
   stage.style.transform = `scale(${s})`;
+  document.documentElement.style.setProperty("--escala", s); // para lo que se dibuja fuera del escenario
 }
 
 /* ---------- carga y fusión de datos ---------- */

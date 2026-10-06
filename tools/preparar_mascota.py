@@ -41,5 +41,18 @@ def main():
         print(f"{nombre:16s} tamaño {pieza.width}x{pieza.height}  "
               f"left={caja[0] - x0} top={caja[1] - y0}")
 
+    # Versiones para cuando se asoma por los bordes de la pantalla: la cabeza
+    # siempre apunta hacia el centro de la pantalla.
+    torso = im.crop((x0, y0, x1, y1))
+    asomadas = {
+        "asoma-abajo.png": torso,                                  # cabeza arriba
+        "asoma-arriba.png": torso.transpose(Image.ROTATE_180),     # cabeza abajo
+        "asoma-izq.png": torso.transpose(Image.ROTATE_270),        # cabeza hacia la derecha
+        "asoma-der.png": torso.transpose(Image.ROTATE_90),         # cabeza hacia la izquierda
+    }
+    for nombre, pieza in asomadas.items():
+        pieza.save(DESTINO / nombre, optimize=True)
+        print(f"{nombre:16s} tamaño {pieza.width}x{pieza.height}")
+
 if __name__ == "__main__":
     main()
