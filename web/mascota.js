@@ -33,6 +33,10 @@
   const T_CIERRE_BOCADILLO = 350;
   const T_ENTRE_DEMOS = 6000;
 
+  // Duración total de cada aparición: 1 minuto (entrar + bocadillo en pantalla + salir).
+  const T_TOTAL_MS = 60 * 1000;
+  const T_LECTURA_MS = T_TOTAL_MS - 2 * T_CAMINATA - T_CIERRE_BOCADILLO;
+
   const DEMO = new URLSearchParams(location.search).get("mascota") === "1";
 
   const $m = (id) => document.getElementById(id);
@@ -119,7 +123,7 @@
     mascota.className = "mascota habla";
     bocadillo.hidden = false;
     bocadillo.className = "bocadillo aparece";
-    await esperar(Math.max(9000, 4500 + texto.length * 75));
+    await esperar(T_LECTURA_MS);
 
     // 3) Cierra el bocadillo y se va caminando
     bocadillo.className = "bocadillo desaparece";
