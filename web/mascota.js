@@ -230,7 +230,9 @@
     if (asomando || enCurso) return;
     if (typeof blackoutActivo !== "undefined" && blackoutActivo) return;
     const ahora = new Date();
-    if (ahora.getMinutes() % ASOMA_CADA_MIN !== ASOMA_MINUTO || ahora.getSeconds() > 20) return;
+    // Vale cualquier segundo del minuto: si el navegador frena los temporizadores
+    // (pestaña en segundo plano, equipo lento) no se pierde la asomada.
+    if (ahora.getMinutes() % ASOMA_CADA_MIN !== ASOMA_MINUTO) return;
     const id = `${ahora.getDate()} ${ahora.getHours()}:${ahora.getMinutes()}`;
     if (id === ultimaAsomada) return;
     ultimaAsomada = id;
