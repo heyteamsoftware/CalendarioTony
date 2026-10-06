@@ -581,8 +581,12 @@ let diaPintado = null;
 
 /* ---------- pantalla en negro (horario nocturno / fin de semana) ---------- */
 
-/* Lunes a viernes de 20:00 a 08:00, y sábado/domingo completos. */
+/* Lunes a viernes de 20:00 a 08:00, y sábado/domingo completos.
+   Con ?negro=0 en la dirección se desactiva (solo para hacer pruebas). */
+const NEGRO_DESACTIVADO = new URLSearchParams(location.search).get("negro") === "0";
+
 function enBlackout(now) {
+  if (NEGRO_DESACTIVADO) return false;
   const dia = now.getDay(); // 0 = domingo … 6 = sábado
   if (dia === 0 || dia === 6) return true;
   const min = now.getHours() * 60 + now.getMinutes();

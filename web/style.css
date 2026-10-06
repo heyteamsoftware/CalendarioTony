@@ -66,6 +66,7 @@ html, body {
   padding: 34px 40px 30px;
   display: flex;
   flex-direction: column;
+  position: relative; /* referencia de la mascota */
 }
 
 /* ---------- cabecera ---------- */
@@ -734,4 +735,131 @@ html, body {
   font-size: 18px;
   font-style: italic;
   color: var(--muted-2);
+}
+
+/* ---------- mascota (días tranquilos): pasea y cuenta una curiosidad ---------- */
+
+.mascota {
+  position: absolute;
+  right: 90px;
+  bottom: 30px;
+  width: 306px;
+  height: 524px;
+  z-index: 50;
+  pointer-events: none;
+}
+.mascota[hidden] { display: none; }
+
+.m-sombra {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  bottom: -12px;
+  height: 34px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+/* La figura se dibuja a su tamaño original (273x468) y se escala en bloque. */
+.m-escala {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 273px;
+  height: 468px;
+  transform: scale(1.12);
+  transform-origin: 0 0;
+}
+.m-cuerpo { position: absolute; inset: 0; transform-origin: 50% 100%; }
+.m-torso { position: absolute; left: 0; top: 0; width: 273px; height: 416px; z-index: 2; }
+.m-pierna { position: absolute; top: 410px; height: 58px; z-index: 1; }
+.m-pierna-izq { left: 22px; width: 117px; transform-origin: 75px 3px; }
+.m-pierna-der { left: 139px; width: 115px; transform-origin: 42px 3px; }
+
+/* Entrada y salida: recorre el lateral de la pantalla caminando. */
+.mascota.entra { animation: m-entra 4.6s linear forwards; }
+.mascota.sale  { animation: m-sale 4.6s linear forwards; }
+@keyframes m-entra { from { transform: translateX(620px); } to { transform: translateX(0); } }
+@keyframes m-sale  { from { transform: translateX(0); } to { transform: translateX(620px); } }
+
+/* Paseo: el cuerpo se balancea y cada pie se levanta alternativamente. */
+.mascota.camina .m-cuerpo { animation: m-balanceo 0.56s ease-in-out infinite; }
+.mascota.camina .m-pierna-izq { animation: m-paso-izq 0.56s ease-in-out infinite; }
+.mascota.camina .m-pierna-der { animation: m-paso-der 0.56s ease-in-out infinite; }
+@keyframes m-balanceo {
+  0%, 100% { transform: translateY(0) rotate(-2.4deg); }
+  25%      { transform: translateY(-10px) rotate(0deg); }
+  50%      { transform: translateY(0) rotate(2.4deg); }
+  75%      { transform: translateY(-10px) rotate(0deg); }
+}
+@keyframes m-paso-izq {
+  0%, 50%, 100% { transform: translateY(0) rotate(0deg); }
+  25%           { transform: translateY(-14px) rotate(-8deg); }
+}
+@keyframes m-paso-der {
+  0%, 25%, 100% { transform: translateY(0) rotate(0deg); }
+  75%           { transform: translateY(-14px) rotate(8deg); }
+}
+
+/* Mientras habla: pequeño rebote, como si respirara con cada frase. */
+.mascota.habla .m-cuerpo { animation: m-habla 0.8s ease-in-out infinite; }
+@keyframes m-habla {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50%      { transform: translateY(-5px) scale(1.012, 0.99); }
+}
+
+/* Bocadillo de cómic: sale de la boca. Bocadillo y cola forman una sola pieza
+   (la cola es un SVG que sale del borde recto de abajo, no de la esquina). */
+.bocadillo {
+  position: absolute;
+  right: calc(100% - 46px);
+  bottom: calc(100% - 126px);
+  width: max-content;
+  min-width: 400px;
+  max-width: 740px;
+  padding: 20px 34px 24px;
+  background: #fff;
+  border: 6px solid #1b1b1b;
+  border-radius: 42px 42px 14px 42px;
+  color: #1b1b1b;
+  filter: drop-shadow(8px 10px 0 rgba(0, 0, 0, 0.28));
+  transform-origin: 100% 100%;
+}
+.bocadillo[hidden] { display: none; }
+.bocadillo.aparece { animation: m-pop 0.5s cubic-bezier(0.2, 1.7, 0.4, 1) both; }
+.bocadillo.desaparece { animation: m-despop 0.3s ease-in both; }
+@keyframes m-pop    { from { transform: scale(0.05); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes m-despop { from { transform: scale(1); opacity: 1; } to { transform: scale(0.05); opacity: 0; } }
+
+/* Cola: relleno del mismo color que el bocadillo (tapa el borde en la unión) y
+   trazo negro solo en los dos lados que dan al exterior. */
+.bocadillo-cola {
+  position: absolute;
+  right: -54px;
+  top: calc(100% - 3px);
+  width: 124px;
+  height: 54px;
+  overflow: visible;
+}
+.cola-relleno { fill: #fff; }
+.cola-trazo {
+  fill: none;
+  stroke: #1b1b1b;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-linecap: butt;
+}
+
+.bocadillo-titulo {
+  font-family: "Bangers", "Archivo", cursive;
+  font-size: 46px;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: #C23A2E;
+  margin-bottom: 8px;
+}
+.bocadillo-texto {
+  font-family: "Comic Neue", "Comic Sans MS", "Chalkboard SE", cursive;
+  font-weight: 700;
+  font-size: 37px;
+  line-height: 1.2;
 }

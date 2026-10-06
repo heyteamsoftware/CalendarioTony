@@ -12,8 +12,8 @@
 <meta name="theme-color" content="#08182C">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=24">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;1,400&family=Bangers&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=25">
 </head>
 <body>
 
@@ -92,6 +92,25 @@
       <section class="tq-cuentas" id="tqCuentas"></section>
     </main>
 
+    <div class="mascota" id="mascota" hidden>
+      <div class="m-sombra"></div>
+      <div class="m-escala">
+        <div class="m-cuerpo">
+          <img class="m-pierna m-pierna-izq" src="img/mascota/pierna-izq.png" alt="">
+          <img class="m-pierna m-pierna-der" src="img/mascota/pierna-der.png" alt="">
+          <img class="m-torso" src="img/mascota/torso.png" alt="">
+        </div>
+      </div>
+      <div class="bocadillo" id="bocadillo" hidden>
+        <div class="bocadillo-titulo">¿Sabías que…?</div>
+        <div class="bocadillo-texto" id="bocadilloTexto"></div>
+        <svg class="bocadillo-cola" viewBox="0 0 124 54" aria-hidden="true">
+          <polygon class="cola-relleno" points="0,0 48,0 122,54"/>
+          <path class="cola-trazo" d="M13.6,6 L122,54 L56.2,6"/>
+        </svg>
+      </div>
+    </div>
+
     <footer class="bottom">
       <div class="leyenda" id="leyenda"></div>
       <div class="spacer"></div>
@@ -105,6 +124,7 @@
   </div>
 </div>
 
-<script src="app.js?v=24"></script>
+<script src="app.js?v=25"></script>
+<script src="mascota.js?v=3"></script>
 </body>
 </html>
